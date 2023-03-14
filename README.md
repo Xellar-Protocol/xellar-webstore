@@ -1,146 +1,122 @@
-# Next js Blog Boilerplate with Tailwind CSS [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/cloudposse.svg?style=social&label=Follow%20%40Ixartz)](https://twitter.com/ixartz)
+# Next.js + Tailwind CSS + TypeScript Starter and Boilerplate
 
-<p align="center">
-  <a href="https://creativedesignsguru.com/demo/Nextjs-Blog-Boilerplate/"><img src="public/assets/images/nextjs-starter-banner.png?raw=true" alt="Nextjs starter banner"></a>
-</p>
+<div align="center">
+  <h2>🔋 ts-nextjs-tailwind-starter</h2>
+  <p>Next.js + Tailwind CSS + TypeScript starter packed with useful development features.</p>
+  <p>Made by <a href="https://theodorusclarence.com">Theodorus Clarence</a></p>
 
-🚀 Next.js Blog Boilerplate is starter code for your blog based on Next.js 12+ framework with Tailwind CSS 3.0. ⚡️ Made with [Next.js](https://nextjs.org), [TypeScript](https://www.typescriptlang.org), [ESLint](https://eslint.org), [Prettier](https://prettier.io), [PostCSS](https://postcss.org), [Tailwind CSS](https://tailwindcss.com).
+[![GitHub Repo stars](https://img.shields.io/github/stars/theodorusclarence/ts-nextjs-tailwind-starter)](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter/stargazers)
+[![Depfu](https://badges.depfu.com/badges/fc6e730632ab9dacaf7df478a08684a7/overview.svg)](https://depfu.com/github/theodorusclarence/ts-nextjs-tailwind-starter?project_id=30160)
+[![Last Update](https://img.shields.io/badge/deps%20update-every%20sunday-blue.svg)](https://shields.io/)
 
-Clone this project and use it to create your own [Next.js](https://nextjs.org) blog. You can check a [Next js blog templates demo](https://creativedesignsguru.com/demo/Nextjs-Blog-Boilerplate/).
+</div>
 
-### Features
+## Features
 
-Blog feature:
+This repository is 🔋 battery packed with:
 
-- 🎈 Syntax Highlighting with Prism.js
-- 🤖 SEO metadata and Open Graph tags
-- ⚙️ JSON-LD for richer indexing
-- 📖 Pagination
-- 🌈 Include a FREE minimalist blog theme
-- ⬇️ Markdown
-- 💯 Maximize lighthouse score
+- ⚡️ Next.js 13
+- ⚛️ React 18
+- ✨ TypeScript
+- 💨 Tailwind CSS 3 — Configured with CSS Variables to extend the **primary** color
+- 💎 Pre-built Components — Components that will **automatically adapt** with your brand color, [check here for the demo](https://tsnext-tw.thcl.dev/components)
+- 🃏 Jest — Configured for unit testing
+- 📈 Absolute Import and Path Alias — Import components using `@/` prefix
+- 📏 ESLint — Find and fix problems in your code, also will **auto sort** your imports
+- 💖 Prettier — Format your code consistently
+- 🐶 Husky & Lint Staged — Run scripts on your staged files before they are committed
+- 🤖 Conventional Commit Lint — Make sure you & your teammates follow conventional commit
+- ⏰ Release Please — Generate your changelog by activating the `release-please` workflow
+- 👷 Github Actions — Lint your code on PR
+- 🚘 Automatic Branch and Issue Autolink — Branch will be automatically created on issue **assign**, and auto linked on PR
+- 🔥 Snippets — A collection of useful snippets
+- 👀 Default Open Graph — Awesome open graph generated using [og](https://github.com/theodorusclarence/og), fork it and deploy!
+- 🗺 Site Map — Automatically generate sitemap.xml
+- 📦 Expansion Pack — Easily install common libraries, additional components, and configs
 
-Developer experience first:
+See the 👉 [feature details and changelog](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter/blob/main/CHANGELOG.md) 👈 for more.
 
-- 🔥 [Next.js](https://nextjs.org) for Static Site Generator
-- 🎨 Integrate with [Tailwind CSS](https://tailwindcss.com)
-- 💅 [PostCSS](https://postcss.org) for processing [Tailwind CSS](https://tailwindcss.com)
-- 🎉 Type checking [TypeScript](https://www.typescriptlang.org)
-- ✏️ Linter with [ESLint](https://eslint.org)
-- 🛠 Code Formatter with [Prettier](https://prettier.io)
-- 🦊 SEO metadata, [JSON-LD](https://developers.google.com/search/docs/guides/intro-structured-data) and [Open Graph](https://ogp.me/) tags with [Next SEO](https://github.com/garmeeh/next-seo)
-- ⚙️ [Bundler Analyzer](https://www.npmjs.com/package/@next/bundle-analyzer)
+You can also check all of the **details and demos** on my blog post:
 
-Built-in feature from Next.js:
+- [One-stop Starter to Maximize Efficiency on Next.js & Tailwind CSS Projects](https://theodorusclarence.com/blog/one-stop-starter)
 
-- ☕ Minify HTML & CSS
-- 💨 Live reload
-- ✅ Cache busting
+## Getting Started
 
-### Philosophy
+### 1. Clone this template using one of the three ways:
 
-- Minimal code
-- SEO-friendly
-- 🚀 Production-ready
+1. Use this repository as template
 
-### Requirements
+   **Disclosure:** by using this repository as a template, there will be an attribution on your repository.
 
-- Node.js and npm
+   I'll appreciate if you do, so this template can be known by others too 😄
 
-### Nextless.js SaaS Boilerplate
+   ![Use as template](https://user-images.githubusercontent.com/55318172/129183039-1a61e68d-dd90-4548-9489-7b3ccbb35810.png)
 
-Build your SaaS product faster with [React SaaS Boilerplate](https://nextlessjs.com).
+2. Using `create-next-app`
 
-[![React SaaS Boilerplate Next.js](https://creativedesignsguru.com/assets/images/themes/next-js-saas-starter-kit.jpg)](https://nextlessjs.com)
+   ```bash
+   npx create-next-app -e https://github.com/theodorusclarence/ts-nextjs-tailwind-starter project-name
+   ```
 
-### Premium Themes ([Nextjs Themes](https://creativedesignsguru.com/category/nextjs/))
+3. Using `degit`
 
-| [Blue Dark Nextjs Theme](https://creativedesignsguru.com/blue-dark-nextjs-theme/) | [Blue Eclatant Nextjs Theme](https://creativedesignsguru.com/blue-eclatant-nextjs-theme/) |
-| --- | --- |
-| [![Blue Dark Nextjs Theme premium](https://creativedesignsguru.com/assets/images/themes/blue-dark-mode-nextjs-theme-homepage-xs.png)](https://creativedesignsguru.com/blue-dark-nextjs-theme/) | [![Blue Eclatant Nextjs Theme premium](https://creativedesignsguru.com/assets/images/themes/eclatant-blue-nextjs-theme-homepage-xs.png)](https://creativedesignsguru.com/blue-eclatant-nextjs-theme/) |
+   ```bash
+   npx degit theodorusclarence/ts-nextjs-tailwind-starter YOUR_APP_NAME
+   ```
 
-| [Blue Modern Nextjs Theme](https://creativedesignsguru.com/blue-modern-nextjs-theme/) | [Blue Minimalist Nextjs Theme](https://creativedesignsguru.com/blue-minimalist-nextjs-theme/) |
-| --- | --- |
-| [![Blue Modern Nextjs Theme premium](https://creativedesignsguru.com/assets/images/themes/modern-blue-nextjs-theme-homepage-xs.png)](https://creativedesignsguru.com/blue-modern-nextjs-theme/) | [![Blue Minimalist Nextjs Theme premium](https://creativedesignsguru.com/assets/images/themes/minimalist-blue-nextjs-theme-homepage-xs.png)](https://creativedesignsguru.com/blue-minimalist-nextjs-theme/) |
+4. Deploy to Vercel
 
-### Getting started
+   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Ftheodorusclarence%2Fts-nextjs-tailwind-starter)
 
-Run the following command on your local environment:
+### 2. Install dependencies
 
-```
-git clone --depth=1 https://github.com/ixartz/Next-js-Blog-Boilerplate.git my-project-name
-cd my-project-name
-npm install
-```
+It is encouraged to use **yarn** so the husky hooks can work properly.
 
-Then, you can run locally in development mode with live reload:
-
-```
-npm run dev
+```bash
+yarn install
 ```
 
-Open http://localhost:3000 with your favorite browser to see your project.
+### 3. Run the development server
 
-```
-.
-├── _posts            # Your blog posts
-├── public            # Static files
-│   ├── assets
-│   │   └── images
-│   │       └── posts # Images used in your blog posts
-└── src
-    ├── pages         # Next.js pages
-    ├── styles        # Your blog CSS files
-    └── templates     # Blog templates
+You can start the server using this command:
+
+```bash
+yarn dev
 ```
 
-### Customization
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. You can start editing the page by modifying `src/pages/index.tsx`.
 
-You can easily configure Next js Boilerplate. Please change the following file:
+### 4. Change defaults
 
-- `public/apple-touch-icon.png`, `public/favicon.ico`, `public/favicon-16x16.png` and `public/favicon-32x32.png`: your blog favicon, you can generate from https://favicon.io/favicon-converter/
-- `public/assets/images/logo.png`, `public/assets/images/logo-32x32.png`: your blog logo
-- `src/styles/main.css`: your blog CSS file using Tailwind CSS
-- `src/utils/Config.ts`: configuration file like blog name, url, etc.
-- `src/templates/Main.tsx`: blog theme
+There are some things you need to change including title, urls, favicons, etc.
 
-### Deploy to production
+Find all comments with !STARTERCONF, then follow the guide.
 
-You can see the results locally in production mode with:
+Don't forget to change the package name in package.json
 
-```
-$ npm run build
-$ npm run start
-```
+### 5. Commit Message Convention
 
-The generated HTML and CSS files are minified (built-in feature from Next js). It will also removed unused CSS from [Tailwind CSS](https://tailwindcss.com).
+This starter is using [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), it is mandatory to use it to commit changes.
 
-You can create an optimized production build with:
+## Projects using ts-nextjs-tailwind-starter
 
-```
-npm run build-prod
-```
+<!--
+TEMPLATE
+- [sitename](https://sitelink.com) ([Source](https://github.com/githublink))
+- [sitename](https://sitelink.com)
+-->
 
-Now, your blog is ready to be deployed. All generated files are located at `dist` folder, which you can deploy with any hosting service.
+- [theodorusclarence.com](https://theodorusclarence.com) ([Source](https://github.com/theodorusclarence/theodorusclarence.com))
+- [Notiolink](https://notiolink.thcl.dev/) ([Source](https://github.com/theodorusclarence/notiolink))
 
-### Deploy to Netlify
+Are you using this starter? Please add your page (and repo) to the end of the list via a [Pull Request](https://github.com/theodorusclarence/ts-nextjs-tailwind-starter/edit/main/README.md). 😃
 
-Clone this repository on own GitHub account and deploy to Netlify:
+## Expansion Pack 📦
 
-[![Netlify Deploy button](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ixartz/Next-js-Blog-Boilerplate)
+This starter is now equipped with an [expansion pack](https://github.com/theodorusclarence/expansion-pack).
 
-### Contributions
+You can easily add expansion such as React Hook Form + Components, Storybook, and more just using a single command line.
 
-Everyone is welcome to contribute to this project. Feel free to open an issue if you have question or found a bug.
+https://user-images.githubusercontent.com/55318172/146631994-e1cac137-1664-4cfe-950b-a96decc1eaa6.mp4
 
-### License
-
-Licensed under the MIT License, Copyright © 2022
-
-See [LICENSE](LICENSE) for more information.
-
----
-
-Made with ♥ by [CreativeDesignsGuru](https://creativedesignsguru.com) [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/cloudposse.svg?style=social&label=Follow%20%40Ixartz)](https://twitter.com/ixartz)
-
-[![Sponsor Next JS Boilerplate](https://cdn.buymeacoffee.com/buttons/default-red.png)](https://www.buymeacoffee.com/ixartz)
+Check out the [expansion pack repository](https://github.com/theodorusclarence/expansion-pack) for the commands

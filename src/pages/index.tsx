@@ -1,41 +1,70 @@
-import React from 'react';
+import * as React from 'react';
 
-import { GetStaticProps } from 'next';
+import Layout from '@/components/layout/Layout';
+import ArrowLink from '@/components/links/ArrowLink';
+import ButtonLink from '@/components/links/ButtonLink';
+import UnderlineLink from '@/components/links/UnderlineLink';
+import UnstyledLink from '@/components/links/UnstyledLink';
+import Seo from '@/components/Seo';
 
-import { BlogGallery, IBlogGalleryProps } from '../blog/BlogGallery';
-import { Meta } from '../layout/Meta';
-import { IPaginationProps } from '../pagination/Pagination';
-import { Main } from '../templates/Main';
-import { AppConfig } from '../utils/AppConfig';
-import { getAllPosts } from '../utils/Content';
+/**
+ * SVGR Support
+ * Caveat: No React Props Type.
+ *
+ * You can override the next-env if the type is important to you
+ * @see https://stackoverflow.com/questions/68103844/how-to-override-next-js-svg-module-declaration
+ */
+import Vercel from '~/svg/Vercel.svg';
 
-const Index = (props: IBlogGalleryProps) => (
-  <Main
-    meta={
-      <Meta
-        title="Made with Next.js, TypeScript, ESLint, Prettier, PostCSS, Tailwind CSS"
-        description={AppConfig.description}
-      />
-    }
-  >
-    <BlogGallery posts={props.posts} pagination={props.pagination} />
-  </Main>
-);
+export default function HomePage() {
+  return (
+    <Layout>
+      {/* <Seo templateTitle='Home' /> */}
+      <Seo />
 
-export const getStaticProps: GetStaticProps<IBlogGalleryProps> = async () => {
-  const posts = getAllPosts(['title', 'date', 'slug']);
-  const pagination: IPaginationProps = {};
+      <main>
+        <section className='bg-white'>
+          <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
+            <Vercel className='text-5xl' />
+            <h1 className='mt-4'>
+              Next.js + Tailwind CSS + TypeScript Starter
+            </h1>
+            <p className='mt-2 text-sm text-gray-800'>
+              A starter for Next.js, Tailwind CSS, and TypeScript with Absolute
+              Import, Seo, Link component, pre-configured with Husky{' '}
+            </p>
+            <p className='mt-2 text-sm text-gray-700'>
+              <ArrowLink href='https://github.com/theodorusclarence/ts-nextjs-tailwind-starter'>
+                See the repository
+              </ArrowLink>
+            </p>
 
-  if (posts.length > AppConfig.pagination_size) {
-    pagination.next = '/page2';
-  }
+            <ButtonLink className='mt-6' href='/components' variant='light'>
+              See all components
+            </ButtonLink>
 
-  return {
-    props: {
-      posts: posts.slice(0, AppConfig.pagination_size),
-      pagination,
-    },
-  };
-};
+            <UnstyledLink
+              href='https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Ftheodorusclarence%2Fts-nextjs-tailwind-starter'
+              className='mt-4'
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                width='92'
+                height='32'
+                src='https://vercel.com/button'
+                alt='Deploy with Vercel'
+              />
+            </UnstyledLink>
 
-export default Index;
+            <footer className='absolute bottom-2 text-gray-700'>
+              © {new Date().getFullYear()} By{' '}
+              <UnderlineLink href='https://theodorusclarence.com?ref=tsnextstarter'>
+                Theodorus Clarence
+              </UnderlineLink>
+            </footer>
+          </div>
+        </section>
+      </main>
+    </Layout>
+  );
+}
