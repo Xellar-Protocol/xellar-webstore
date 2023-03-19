@@ -41,6 +41,14 @@
       U+2215, U+FEFF, U+FFFD;
   }
 
+  @font-face {
+    font-family: 'BasierCircle';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/src/font/BasierCircle/BasierCircle-Regular.otf')
+      format('opentype');
+  }
+
   .cursor-newtab {
     cursor: url('/images/new-tab.png') 10 10, pointer;
   }

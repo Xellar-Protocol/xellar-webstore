@@ -15,11 +15,19 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <nav className='mx-24 my-12 flex items-center justify-between'>
-        <Logo height='auto' width={140} />
+        <Link href='/'>
+          <Logo height='auto' width={140} />
+        </Link>
         <div className='item-center flex gap-14'>
-          <p className='text-xl font-normal'>Blog</p>
-          <p className='text-xl font-normal'>Download App</p>
-          <Cart height='auto' width={35} />
+          <Link href='#'>
+            <p className='text-xl font-normal'>Blog</p>
+          </Link>
+          <Link href='#'>
+            <p className='text-xl font-normal'>Download App</p>
+          </Link>
+          <Link href='/shop'>
+            <Cart height='auto' width={35} />
+          </Link>
         </div>
       </nav>
       {children}

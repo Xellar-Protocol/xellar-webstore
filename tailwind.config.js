@@ -1,13 +1,19 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { fontFamily } = require('tailwindcss/defaultTheme');
+const withMT = require('@material-tailwind/react/utils/withMT');
 
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+module.exports = withMT({
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}',
+    './node_modules/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}',
+  ],
   theme: {
     extend: {
       fontFamily: {
         primary: ['Gellix', ...fontFamily.sans],
+        main: ['BasierCircle', 'sans-serif'],
       },
       colors: {
         primary: {
@@ -53,4 +59,4 @@ module.exports = {
     },
   },
   plugins: [require('@tailwindcss/forms')],
-};
+});
