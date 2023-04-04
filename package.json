@@ -18,7 +18,11 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@material-tailwind/react": "^1.4.2",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.11.16",
     "@trendyol-js/react-carousel": "^3.0.2",
     "clsx": "^1.2.1",
     "flowbite": "^1.6.4",

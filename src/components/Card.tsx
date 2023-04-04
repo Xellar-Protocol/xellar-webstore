@@ -14,7 +14,7 @@ export default function Card({
   imageLink,
 }: CardProps) {
   return (
-    <div className='my-8 ml-8 w-80 rounded-2xl bg-primary-400 p-7'>
+    <div className='my-8 ml-4 w-64 rounded-2xl bg-primary-400 p-5 md:ml-8 md:w-80 md:p-7'>
       <div className='mb-5 flex items-center gap-5'>
         {imageLink ? (
           <NextImage

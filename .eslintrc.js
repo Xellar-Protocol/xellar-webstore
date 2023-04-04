@@ -39,9 +39,9 @@ module.exports = {
     //#endregion  //*======== Unused Import ===========
 
     //#region  //*=========== Import Sort ===========
-    'simple-import-sort/exports': 'warn',
+    'simple-import-sort/exports': 'error',
     'simple-import-sort/imports': [
-      'warn',
+      'error',
       {
         groups: [
           // ext library & side effect imports
