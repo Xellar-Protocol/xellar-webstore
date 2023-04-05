@@ -6,6 +6,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import NextImage from '@/components/NextImage';
@@ -20,11 +21,19 @@ import Twitter from '~/svg/twitter.svg';
 export default function Layout({ children }: { children: React.ReactNode }) {
   // Put Header or Footer Here
   const [menu, setMenu] = React.useState(false);
+  const router = useRouter();
   return (
     <div className='mx-auto xl:w-[1440px]'>
       <nav className='mx-6 my-6 flex items-center justify-between md:mx-10 md:my-5 lg:mx-16 lg:my-10 xl:mx-24 xl:my-12'>
-        <Link href='/'>
+        <Link href='/' className='flex items-center gap-1 md:gap-2'>
           <Logo height='auto' className='w-[80px] md:w-auto' width={140} />
+          {router?.pathname?.split('/')[1] === 'shop' ? (
+            <h1 className='text-xl font-semibold md:mb-1 md:text-4xl lg:hidden'>
+              Shop
+            </h1>
+          ) : (
+            ''
+          )}
         </Link>
         <div
           onClick={() => {
