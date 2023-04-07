@@ -14,8 +14,8 @@ export default function HomePage() {
       <Seo />
 
       <main>
-        <section className='lg:mx-16 lg:my-10 lg:flex lg:justify-between xl:mx-24 xl:my-12'>
-          <div className='mx-6 my-4 h-full md:mx-10 md:my-5 lg:mx-0 lg:my-0 lg:w-full'>
+        <section className='mx-6 my-6 flex flex-col md:mx-10 md:my-5 lg:mx-16 lg:my-10 lg:flex-row lg:justify-between xl:mx-24 xl:my-12'>
+          <div className='order-2 h-full lg:order-1 lg:w-full'>
             <p className='mt-10 text-base text-primary-700 md:text-2xl md:text-primary-900 lg:mb-6 lg:mt-auto'>
               Coming Soon
             </p>
@@ -34,10 +34,10 @@ export default function HomePage() {
               Shop Now
             </ButtonLink>
           </div>
-          <div className='bg-gradient-to-br from-[#0286DEC2] via-[#34A3EE91] to-[#DCEEFFBA] xl:w-5/12'>
+          <div className='order-1 rounded-2xl bg-[#EFF1F3] lg:order-2 lg:rounded-none lg:bg-gradient-to-br lg:from-[#0286DEC2] lg:via-[#34A3EE91] lg:to-[#DCEEFFBA] xl:w-5/12'>
             <NextImage
-              imgClassName='mx-auto'
-              className='mt-10 md:mt-20 lg:mt-40 lg:mb-28 lg:w-full xl:ml-[-150px]'
+              imgClassName='mx-auto my-auto p-5 md:w-2/3 lg:w-auto lg:py-10 xl:py-0'
+              className='lg:mt-40 lg:mb-28 lg:w-full xl:ml-[-150px]'
               useSkeleton
               src='/images/hero-image.png'
               width='670'
