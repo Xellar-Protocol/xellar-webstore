@@ -22,6 +22,10 @@ export default function Shop() {
     setOpen(open === value ? 0 : value);
   };
 
+  React.useEffect(() => {
+    setAmount(Number(window.localStorage.getItem('amount')));
+  }, []);
+
   return (
     <Layout>
       {/* <Seo templateTitle='Home' /> */}
@@ -76,7 +80,13 @@ export default function Shop() {
               <div className='flex items-center justify-center gap-3 rounded-2xl border border-gray-500 p-2'>
                 <button
                   onClick={() => {
-                    if (amount > 1) setAmount(amount - 1);
+                    if (amount > 1) {
+                      window.localStorage.setItem(
+                        'amount',
+                        (amount - 1).toString()
+                      );
+                      setAmount(amount - 1);
+                    }
                   }}
                 >
                   <svg
@@ -97,6 +107,10 @@ export default function Shop() {
                 <p className='text-xl'>{amount}</p>
                 <button
                   onClick={() => {
+                    window.localStorage.setItem(
+                      'amount',
+                      (amount + 1).toString()
+                    );
                     setAmount(amount + 1);
                   }}
                 >

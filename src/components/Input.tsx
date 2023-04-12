@@ -78,7 +78,7 @@ export function SelectButton({
       <label htmlFor={id} className='mb-3 font-medium'>
         {label}
       </label>
-      <div className='flex gap-5'>
+      <div className='flex gap-2 md:gap-5'>
         {list.map((item, idx) => (
           <button
             key={idx}
