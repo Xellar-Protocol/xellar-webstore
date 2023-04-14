@@ -1,20 +1,34 @@
 import * as React from 'react';
 
 type InputProps = {
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   label?: string;
   id?: string;
   type?: string;
+  value?: string | number;
   className?: string;
   maxLength?: number;
+  required?: boolean;
 };
 
-export function Input({ label, id, type, className, maxLength }: InputProps) {
+export function Input({
+  label,
+  id,
+  type,
+  className,
+  maxLength,
+  required,
+  onChange,
+  value,
+}: InputProps) {
   return (
     <div className={`flex w-full flex-col ${className}`}>
       <label htmlFor={id} className='mb-3 font-medium'>
-        {label}
+        {label} {required ? <span className='text-red-700'>*</span> : ''}
       </label>
       <input
+        value={value ?? ''}
+        onChange={onChange}
         type={type}
         id={id}
         maxLength={maxLength}

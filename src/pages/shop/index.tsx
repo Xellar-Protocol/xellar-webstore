@@ -14,6 +14,7 @@ import NextImage from '@/components/NextImage';
 import Seo from '@/components/Seo';
 
 export default function Shop() {
+  const [price] = React.useState<number>(19.99);
   const [amount, setAmount] = React.useState<number>(1);
   const [open, setOpen] = React.useState<number>(1);
   const [card, setCard] = React.useState<number>(1);
@@ -23,7 +24,11 @@ export default function Shop() {
   };
 
   React.useEffect(() => {
-    setAmount(Number(window.localStorage.getItem('amount')));
+    setAmount(
+      Number(window.localStorage.getItem('amount')) > 0
+        ? Number(window.localStorage.getItem('amount'))
+        : 1
+    );
   }, []);
 
   return (
@@ -74,7 +79,7 @@ export default function Shop() {
               The worlds most lightweight & secure hard
             </p>
             <p className='w-7/12 text-2xl font-bold leading-loose lg:mb-16'>
-              $19.99
+              ${price}
             </p>
             <div className='my-3 flex gap-6 md:my-6 lg:my-0'>
               <div className='flex items-center justify-center gap-3 rounded-2xl border border-gray-500 p-2'>

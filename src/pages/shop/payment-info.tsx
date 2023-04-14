@@ -1,4 +1,5 @@
 import { Button, Card, Typography } from '@material-tailwind/react';
+import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
@@ -11,11 +12,29 @@ import Logo from '~/svg/logo-horizontal.svg';
 import Cart from '~/svg/shopping-cart.svg';
 
 export default function CustomerInfo() {
-  const [amount, setAmount] = React.useState(0);
   const router = useRouter();
 
+  const [price] = React.useState<number>(19.99);
+  const [amount, setAmount] = React.useState(0);
+  const [clientToken, setClientToken] = React.useState('');
+
+  const getClientToken = async () => {
+    try {
+      await axios
+        .get('/api/payment-paypal')
+        .then((res) => setClientToken(res?.data?.clientToken));
+    } catch (error) {
+      setClientToken('');
+    }
+  };
+
   React.useEffect(() => {
-    setAmount(Number(window.localStorage.getItem('amount')));
+    setAmount(
+      Number(window.localStorage.getItem('amount')) > 0
+        ? Number(window.localStorage.getItem('amount'))
+        : 1
+    );
+    getClientToken();
   }, []);
 
   return (
@@ -43,7 +62,7 @@ export default function CustomerInfo() {
               </Link>
               <div className='flex items-center justify-end gap-1 md:gap-4'>
                 <p className='text-sm font-medium md:text-xl'>
-                  $50.00 ({amount} item)
+                  ${price * amount} ({amount} item)
                 </p>
                 <Link href='/shop'>
                   <Cart
@@ -81,12 +100,12 @@ export default function CustomerInfo() {
                   <p>{amount}x</p>
                   <p>Xellar Hardware</p>
                 </div>
-                <p>$50.00</p>
+                <p>${price * amount}</p>
               </div>
               <div className='ml-auto w-32 md:w-40'>
                 <div className='flex justify-between'>
                   <p>Subtotal</p>
-                  <p>$50.00</p>
+                  <p>${price * amount}</p>
                 </div>
                 <div className='flex justify-between'>
                   <p>Shipping</p>
@@ -94,7 +113,7 @@ export default function CustomerInfo() {
                 </div>
                 <div className='flex justify-between'>
                   <p>Total</p>
-                  <p>$50.00</p>
+                  <p>${price * amount}</p>
                 </div>
               </div>
             </div>
@@ -194,12 +213,12 @@ export default function CustomerInfo() {
             <div className='flex w-full flex-col items-end gap-8'>
               <div className='flex w-full justify-between border-y border-black py-3 xl:w-5/6'>
                 <p>Xellar Hardware</p>
-                <p>x1</p>
+                <p>x{amount}</p>
               </div>
               <div className='flex w-40 flex-col gap-4'>
                 <div className='flex w-full justify-between'>
                   <p>Subtotal</p>
-                  <p>$50.00</p>
+                  <p>${price * amount}</p>
                 </div>
                 <div className='flex w-full justify-between'>
                   <p>Shipping</p>
@@ -207,7 +226,7 @@ export default function CustomerInfo() {
                 </div>
                 <div className='flex w-full justify-between'>
                   <p>Total</p>
-                  <p>$54.00</p>
+                  <p>${price * amount}</p>
                 </div>
               </div>
               <button className='w-40 rounded-2xl bg-black py-5 font-bold text-white'>

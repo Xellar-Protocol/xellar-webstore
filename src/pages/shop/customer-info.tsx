@@ -11,12 +11,79 @@ import Logo from '~/svg/logo-horizontal.svg';
 import Cart from '~/svg/shopping-cart.svg';
 
 export default function CustomerInfo() {
-  const [amount, setAmount] = React.useState(0);
   const router = useRouter();
 
+  const [price] = React.useState<number>(19.99);
+  const [amount, setAmount] = React.useState(0);
+  const [isValid, setIsValid] = React.useState(false);
+  const [data, setData] = React.useState<any>({
+    first_name: '',
+    last_name: '',
+    address_1: '',
+    address_2: '',
+    city: '',
+    state: '',
+    postcode: '',
+    country: '',
+    email_address: '',
+    amount: 1,
+  });
+
+  const updateData = (e: React.ChangeEvent<HTMLInputElement>) => {
+    data[e.target.id] = e.target.value;
+    setData({ ...data });
+
+    window.localStorage.setItem('customer_info', JSON.stringify(data));
+    setIsValid(
+      data.first_name &&
+        data.address_1 &&
+        data.city &&
+        data.state &&
+        data.postcode &&
+        data.country &&
+        data.email_address
+    );
+  };
+
+  // const insertData = async () => {
+  //   try {
+  //     await axios.post('/api/customer-info', data)
+  //       .then((res) => { console.log(res) })
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
   React.useEffect(() => {
-    setAmount(Number(window.localStorage.getItem('amount')));
-  }, []);
+    const userData = window.localStorage.getItem('customer_info');
+    if (userData) {
+      const obj = JSON.parse(userData);
+      Object.entries(obj).map((item) => {
+        data[item[0]] = item[1];
+        setData({ ...data });
+      });
+    }
+
+    setAmount(
+      Number(window.localStorage.getItem('amount')) > 0
+        ? Number(window.localStorage.getItem('amount'))
+        : 1
+    );
+    data.amount =
+      Number(window.localStorage.getItem('amount')) > 0
+        ? Number(window.localStorage.getItem('amount'))
+        : 1;
+    setData({ ...data });
+    setIsValid(
+      data.first_name &&
+        data.address_1 &&
+        data.city &&
+        data.state &&
+        data.postcode &&
+        data.country &&
+        data.email_address
+    );
+  }, [data]);
 
   return (
     <>
@@ -43,7 +110,7 @@ export default function CustomerInfo() {
               </Link>
               <div className='flex items-center justify-end gap-1 md:gap-4'>
                 <p className='text-sm font-medium md:text-xl'>
-                  $50.00 ({amount} item)
+                  ${price * amount} ({amount} item)
                 </p>
                 <Link href='/shop'>
                   <Cart
@@ -116,24 +183,45 @@ export default function CustomerInfo() {
                     <Input
                       type='text'
                       label='First name'
-                      id='first-name'
+                      id='first_name'
                       className='col-span-2 md:col-span-1'
+                      required
+                      value={data.first_name}
+                      onChange={updateData}
                     />
                     <Input
                       type='text'
                       label='Last name'
-                      id='last-name'
+                      id='last_name'
                       className='col-span-2 md:col-span-1'
+                      value={data.last_name}
+                      onChange={updateData}
                     />
                   </div>
-                  <Input type='text' label='Address 1' id='address-1' />
-                  <Input type='text' label='Address 2' id='address-2' />
+                  <Input
+                    type='text'
+                    label='Address 1'
+                    id='address_1'
+                    required
+                    value={data.address_1}
+                    onChange={updateData}
+                  />
+                  <Input
+                    type='text'
+                    label='Address 2'
+                    id='address_2'
+                    value={data.address_2}
+                    onChange={updateData}
+                  />
                   <div className='grid grid-cols-10 gap-3'>
                     <Input
                       type='text'
                       label='City'
                       id='city'
                       className='col-span-10 md:col-span-6'
+                      required
+                      value={data.city}
+                      onChange={updateData}
                     />
                     <Input
                       type='text'
@@ -141,6 +229,9 @@ export default function CustomerInfo() {
                       id='state'
                       maxLength={6}
                       className='col-span-5 md:col-span-2'
+                      required
+                      value={data.state}
+                      onChange={updateData}
                     />
                     <Input
                       type='text'
@@ -148,17 +239,43 @@ export default function CustomerInfo() {
                       id='postcode'
                       maxLength={5}
                       className='col-span-5 md:col-span-2'
+                      required
+                      value={data.postcode}
+                      onChange={updateData}
                     />
                   </div>
-                  <Input type='text' label='Country' id='country' />
-                  <Input type='text' label='Email Address' id='email-address' />
+                  <Input
+                    type='text'
+                    label='Country'
+                    id='country'
+                    required
+                    value={data.country}
+                    onChange={updateData}
+                  />
+                  <Input
+                    type='text'
+                    label='Email Address'
+                    id='email_address'
+                    required
+                    value={data.email_address}
+                    onChange={updateData}
+                  />
                 </div>
                 <div className='w-full text-end'>
-                  <Link href='/shop/payment-info'>
-                    <Button className='mt-4 mb-4 mr-0 w-40 rounded-2xl bg-black text-base capitalize md:w-64 md:text-lg lg:mb-0 lg:w-full'>
+                  {isValid ? (
+                    <Link href='/shop/payment-info'>
+                      <Button className='mt-4 mb-4 mr-0 w-40 rounded-2xl bg-black text-base capitalize md:w-64 md:text-lg lg:mb-0 lg:w-full'>
+                        Next
+                      </Button>
+                    </Link>
+                  ) : (
+                    <Button
+                      disabled
+                      className='mt-4 mb-4 mr-0 w-40 cursor-not-allowed rounded-2xl bg-black text-base capitalize md:w-64 md:text-lg lg:mb-0 lg:w-full'
+                    >
                       Next
                     </Button>
-                  </Link>
+                  )}
                 </div>
               </form>
             </Card>
