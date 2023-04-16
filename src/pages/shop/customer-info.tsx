@@ -101,7 +101,13 @@ export default function CustomerInfo() {
               </Link>
               <div className='flex items-center justify-end gap-1 md:gap-4'>
                 <p className='text-sm font-medium md:text-xl'>
-                  ${(price * amount).toFixed(2)} ({amount} item)
+                  $
+                  {amount == 2
+                    ? 36.99
+                    : amount == 3
+                    ? '50.00'
+                    : (price * amount).toFixed(2)}{' '}
+                  ({amount} item)
                 </p>
                 <Link href='/shop'>
                   <Cart
@@ -139,12 +145,26 @@ export default function CustomerInfo() {
                   <p>{amount}x</p>
                   <p>Xellar Hardware</p>
                 </div>
-                <p>${(price * amount).toFixed(2)}</p>
+                <p>
+                  $
+                  {amount == 2
+                    ? 36.99
+                    : amount == 3
+                    ? '50.00'
+                    : (price * amount).toFixed(2)}
+                </p>
               </div>
               <div className='ml-auto w-32 md:w-40'>
                 <div className='flex justify-between'>
                   <p>Subtotal</p>
-                  <p>${(price * amount).toFixed(2)}</p>
+                  <p>
+                    $
+                    {amount == 2
+                      ? 36.99
+                      : amount == 3
+                      ? '50.00'
+                      : (price * amount).toFixed(2)}
+                  </p>
                 </div>
                 <div className='flex justify-between'>
                   <p>Shipping</p>
@@ -152,7 +172,14 @@ export default function CustomerInfo() {
                 </div>
                 <div className='flex justify-between'>
                   <p>Total</p>
-                  <p>${(price * amount).toFixed(2)}</p>
+                  <p>
+                    $
+                    {amount == 2
+                      ? 36.99
+                      : amount == 3
+                      ? '50.00'
+                      : (price * amount).toFixed(2)}
+                  </p>
                 </div>
               </div>
             </div>

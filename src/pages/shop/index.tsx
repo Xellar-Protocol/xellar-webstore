@@ -47,6 +47,8 @@ export default function Shop() {
                 } w-full rounded-xl py-1`}
                 onClick={() => {
                   setCard(1);
+                  setAmount(1);
+                  window.localStorage.setItem('amount', '1');
                 }}
               >
                 Single
@@ -57,6 +59,8 @@ export default function Shop() {
                 } w-full rounded-xl py-1`}
                 onClick={() => {
                   setCard(2);
+                  setAmount(2);
+                  window.localStorage.setItem('amount', '2');
                 }}
               >
                 Double
@@ -67,6 +71,8 @@ export default function Shop() {
                 } w-full rounded-xl py-1`}
                 onClick={() => {
                   setCard(3);
+                  setAmount(3);
+                  window.localStorage.setItem('amount', '3');
                 }}
               >
                 Triple
@@ -79,7 +85,12 @@ export default function Shop() {
               The worlds most lightweight & secure hard
             </p>
             <p className='w-7/12 text-2xl font-bold leading-loose lg:mb-16'>
-              ${price}
+              $
+              {amount == 2
+                ? 36.99
+                : amount == 3
+                ? '50.00'
+                : (price * amount).toFixed(2)}
             </p>
             <div className='my-3 flex gap-6 md:my-6 lg:my-0'>
               <div className='flex items-center justify-center gap-3 rounded-2xl border border-gray-500 p-2'>
@@ -163,7 +174,12 @@ export default function Shop() {
             <table className='hidden w-full table-auto border-collapse lg:block'>
               <tbody>
                 <tr className='border-y border-black'>
-                  <Link href='#'>
+                  <Link
+                    href='/shop/customer-info'
+                    onClick={() => {
+                      window.localStorage.setItem('amount', '1');
+                    }}
+                  >
                     <td className='flex justify-between gap-5 p-5 xl:gap-10'>
                       <p>Single Card</p>
                       <svg
@@ -184,7 +200,12 @@ export default function Shop() {
                   </Link>
                 </tr>
                 <tr className='border-y border-black'>
-                  <Link href='#'>
+                  <Link
+                    href='/shop/customer-info'
+                    onClick={() => {
+                      window.localStorage.setItem('amount', '2');
+                    }}
+                  >
                     <td className='flex justify-between gap-5 p-5 xl:gap-10'>
                       <p>Double Bundle</p>
                       <svg

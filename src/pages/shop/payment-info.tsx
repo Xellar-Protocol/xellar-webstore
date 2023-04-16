@@ -1,4 +1,5 @@
 import { Button, Card, Typography } from '@material-tailwind/react';
+import { Dialog } from '@mui/material';
 import {
   PayPalHostedField,
   PayPalHostedFieldsProvider,
@@ -6,9 +7,11 @@ import {
   usePayPalHostedFields,
 } from '@paypal/react-paypal-js';
 import axios from 'axios';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
+import { toast } from 'react-toastify';
 
 import Bar from '@/components/Bar';
 import { Input, Radio, SelectButton, Textarea } from '@/components/Input';
@@ -16,14 +19,6 @@ import Seo from '@/components/Seo';
 
 import Logo from '~/svg/logo-horizontal.svg';
 import Cart from '~/svg/shopping-cart.svg';
-
-const CUSTOM_FIELD_STYLE = {
-  border: '1px solid #606060',
-  boxShadow: '2px 2px 10px 2px rgba(0,0,0,0.1)',
-};
-const INVALID_COLOR = {
-  color: '#dc3545',
-};
 
 interface Props {
   customer: any;
@@ -35,6 +30,7 @@ function PaymentInfo({ customer, children }: Props) {
   const hostedField = usePayPalHostedFields();
 
   const [price] = React.useState<number>(19.99);
+  const [open, setOpen] = React.useState(false);
   const [amount, setAmount] = React.useState(0);
   const [isDisable, setIsDisable] = React.useState(false);
   const [data, setData] = React.useState<any>({
@@ -58,9 +54,14 @@ function PaymentInfo({ customer, children }: Props) {
 
     if (isFormInvalid) {
       console.log('Form invalid');
+      toast.error('Form invalid', {
+        position: toast.POSITION.BOTTOM_LEFT,
+        autoClose: 3000,
+      });
       return;
     }
 
+    setOpen(true);
     setIsDisable(true);
     hostedField.cardFields
       .submit(data)
@@ -75,22 +76,29 @@ function PaymentInfo({ customer, children }: Props) {
         })
           .then((response) => response.json())
           .then((data) => {
+            toast.success('Payment Successful!', {
+              position: toast.POSITION.BOTTOM_LEFT,
+              autoClose: 3000,
+            });
             window.localStorage.removeItem('amount');
             window.localStorage.removeItem('customer_info');
             router.push('/shop');
-            // Here use the captured info
           })
           .catch((err) => {
             console.log(err);
-            // Here handle error
+            toast.error(err, {
+              position: toast.POSITION.BOTTOM_LEFT,
+              autoClose: 3000,
+            });
           })
           .finally(() => {
+            setOpen(false);
             setIsDisable(false);
           });
       })
       .catch((err) => {
         console.log(err);
-        // Here handle error
+        setOpen(false);
         setIsDisable(false);
       });
   };
@@ -129,7 +137,13 @@ function PaymentInfo({ customer, children }: Props) {
             </Link>
             <div className='flex items-center justify-end gap-1 md:gap-4'>
               <p className='text-sm font-medium md:text-xl'>
-                ${(price * amount).toFixed(2)} ({amount} item)
+                $
+                {amount == 2
+                  ? 36.99
+                  : amount == 3
+                  ? '50.00'
+                  : (price * amount).toFixed(2)}{' '}
+                ({amount} item)
               </p>
               <Link href='/shop'>
                 <Cart height='auto' width={35} className='w-[25px] md:w-auto' />
@@ -163,12 +177,26 @@ function PaymentInfo({ customer, children }: Props) {
                 <p>{amount}x</p>
                 <p>Xellar Hardware</p>
               </div>
-              <p>${(price * amount).toFixed(2)}</p>
+              <p>
+                $
+                {amount == 2
+                  ? 36.99
+                  : amount == 3
+                  ? '50.00'
+                  : (price * amount).toFixed(2)}
+              </p>
             </div>
             <div className='ml-auto w-32 md:w-40'>
               <div className='flex justify-between'>
                 <p>Subtotal</p>
-                <p>${(price * amount).toFixed(2)}</p>
+                <p>
+                  $
+                  {amount == 2
+                    ? 36.99
+                    : amount == 3
+                    ? '50.00'
+                    : (price * amount).toFixed(2)}
+                </p>
               </div>
               <div className='flex justify-between'>
                 <p>Shipping</p>
@@ -176,7 +204,14 @@ function PaymentInfo({ customer, children }: Props) {
               </div>
               <div className='flex justify-between'>
                 <p>Total</p>
-                <p>${(price * amount).toFixed(2)}</p>
+                <p>
+                  $
+                  {amount == 2
+                    ? 36.99
+                    : amount == 3
+                    ? '50.00'
+                    : (price * amount).toFixed(2)}
+                </p>
               </div>
             </div>
           </div>
@@ -267,6 +302,29 @@ function PaymentInfo({ customer, children }: Props) {
                     'Rp.11,000 - Rp.13,000',
                   ]}
                 />
+                <div className='flex justify-end gap-5'>
+                  <Image
+                    src='/images/paypal.png'
+                    alt='paypal'
+                    height={50}
+                    width={100}
+                    className='h-14 w-auto'
+                  />
+                  <Image
+                    src='/images/visa.png'
+                    alt='visa'
+                    height={50}
+                    width={100}
+                    className='h-14 w-auto'
+                  />
+                  <Image
+                    src='/images/mastercard.png'
+                    alt='mastercard'
+                    height={50}
+                    width={100}
+                    className='h-14 w-auto'
+                  />
+                </div>
               </div>
               <div className='w-full text-end lg:hidden'>
                 <Button
@@ -313,7 +371,14 @@ function PaymentInfo({ customer, children }: Props) {
             <div className='flex w-40 flex-col gap-4'>
               <div className='flex w-full justify-between'>
                 <p>Subtotal</p>
-                <p>${(price * amount).toFixed(2)}</p>
+                <p>
+                  $
+                  {amount == 2
+                    ? 36.99
+                    : amount == 3
+                    ? '50.00'
+                    : (price * amount).toFixed(2)}
+                </p>
               </div>
               <div className='flex w-full justify-between'>
                 <p>Shipping</p>
@@ -321,7 +386,14 @@ function PaymentInfo({ customer, children }: Props) {
               </div>
               <div className='flex w-full justify-between'>
                 <p>Total</p>
-                <p>${(price * amount).toFixed(2)}</p>
+                <p>
+                  $
+                  {amount == 2
+                    ? 36.99
+                    : amount == 3
+                    ? '50.00'
+                    : (price * amount).toFixed(2)}
+                </p>
               </div>
             </div>
             <button
@@ -335,6 +407,23 @@ function PaymentInfo({ customer, children }: Props) {
         </div>
         <div className='h-full rounded-3xl bg-[url("/images/hero-payment.png")] bg-cover' />
       </div>
+      <Dialog
+        open={open}
+        PaperProps={{
+          style: {
+            backgroundColor: 'transparent',
+            boxShadow: 'none',
+            padding: '3em',
+          },
+        }}
+      >
+        <div className='flex items-center justify-center'>
+          <div
+            className='inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]'
+            role='status'
+          ></div>
+        </div>
+      </Dialog>
     </div>
   );
 }
@@ -473,7 +562,23 @@ export default function Payment() {
             </PayPalHostedFieldsProvider>
           </PayPalScriptProvider>
         ) : (
-          ''
+          <Dialog
+            open={true}
+            PaperProps={{
+              style: {
+                backgroundColor: 'transparent',
+                boxShadow: 'none',
+                padding: '3em',
+              },
+            }}
+          >
+            <div className='flex items-center justify-center'>
+              <div
+                className='inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]'
+                role='status'
+              ></div>
+            </div>
+          </Dialog>
         )}
       </main>
     </>
