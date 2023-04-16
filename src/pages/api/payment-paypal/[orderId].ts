@@ -3,10 +3,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID);
 
-async function addCustomer(body: any) {
-  const client_email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-  const private_key = process.env.GOOGLE_PRIVATE_KEY;
-
+async function addCustomer(
+  body: any,
+  client_email: string,
+  private_key: string
+) {
   try {
     if (
       !body.first_name ||
@@ -72,10 +73,12 @@ export default async function handler(
   const base = process.env.PAYPAL_BASE_URL;
   const client_id = process.env.PAYPAL_CLIENT_ID;
   const app_secret = process.env.PAYPAL_APP_SECRET;
+  const client_email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+  const private_key = process.env.GOOGLE_PRIVATE_KEY;
 
   if (req.method === 'POST') {
     try {
-      if (!base || !client_id || !app_secret) {
+      if (!base || !client_id || !app_secret || !client_email || !private_key) {
         throw new Error('Missing Paypal credential data');
       }
 
@@ -98,7 +101,7 @@ export default async function handler(
 
       const resp = await handleResponse(response);
       if (resp.status == 'COMPLETED')
-        addCustomer({ ...body, order_id: orderId });
+        addCustomer({ ...body, order_id: orderId }, client_email, private_key);
 
       res.status(200).json(resp);
     } catch (error) {
