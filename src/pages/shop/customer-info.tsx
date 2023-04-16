@@ -45,15 +45,6 @@ export default function CustomerInfo() {
     );
   };
 
-  // const insertData = async () => {
-  //   try {
-  //     await axios.post('/api/customer-info', data)
-  //       .then((res) => { console.log(res) })
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
   React.useEffect(() => {
     const userData = window.localStorage.getItem('customer_info');
     if (userData) {
@@ -83,7 +74,7 @@ export default function CustomerInfo() {
         data.country &&
         data.email_address
     );
-  }, [data]);
+  }, []);
 
   return (
     <>
@@ -110,7 +101,7 @@ export default function CustomerInfo() {
               </Link>
               <div className='flex items-center justify-end gap-1 md:gap-4'>
                 <p className='text-sm font-medium md:text-xl'>
-                  ${price * amount} ({amount} item)
+                  ${(price * amount).toFixed(2)} ({amount} item)
                 </p>
                 <Link href='/shop'>
                   <Cart
@@ -148,12 +139,12 @@ export default function CustomerInfo() {
                   <p>{amount}x</p>
                   <p>Xellar Hardware</p>
                 </div>
-                <p>$50.00</p>
+                <p>${(price * amount).toFixed(2)}</p>
               </div>
               <div className='ml-auto w-32 md:w-40'>
                 <div className='flex justify-between'>
                   <p>Subtotal</p>
-                  <p>$50.00</p>
+                  <p>${(price * amount).toFixed(2)}</p>
                 </div>
                 <div className='flex justify-between'>
                   <p>Shipping</p>
@@ -161,7 +152,7 @@ export default function CustomerInfo() {
                 </div>
                 <div className='flex justify-between'>
                   <p>Total</p>
-                  <p>$50.00</p>
+                  <p>${(price * amount).toFixed(2)}</p>
                 </div>
               </div>
             </div>

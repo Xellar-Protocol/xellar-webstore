@@ -1,7 +1,4 @@
-import { GoogleSpreadsheet } from 'google-spreadsheet';
 import { NextApiRequest, NextApiResponse } from 'next';
-
-const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID);
 
 // call this function to create your client token
 async function generateClientToken(
@@ -58,39 +55,40 @@ export default async function handler(
   const app_secret = process.env.PAYPAL_APP_SECRET;
 
   if (req.method === 'POST') {
-    const body = req.body;
-    const client_email = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-    const private_key = process.env.GOOGLE_PRIVATE_KEY;
-
     try {
-      if (
-        !body.first_name ||
-        !body.address_1 ||
-        !body.city ||
-        !body.state ||
-        !body.postcode ||
-        !body.country ||
-        !body.email_address
-      ) {
-        throw new Error('Missing body key');
+      if (!base || !client_id || !app_secret) {
+        throw new Error('Missing Paypal credential data');
       }
 
-      if (!client_email || !private_key) {
-        throw new Error('Missing Google service account email or private key');
-      }
-
-      await doc.useServiceAccountAuth({
-        client_email,
-        private_key: private_key.replace(/\\n/gm, '\n'),
+      const body = req.body;
+      const purchaseAmount = (19.99 * body.amount).toFixed(2); // TODO: pull prices from a database
+      const accessToken = await generateAccessToken(
+        base,
+        client_id,
+        app_secret
+      );
+      const url = `${base}/v2/checkout/orders`;
+      const response = await fetch(url, {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          intent: 'CAPTURE',
+          purchase_units: [
+            {
+              amount: {
+                currency_code: 'USD',
+                value: purchaseAmount.toString(),
+              },
+            },
+          ],
+        }),
       });
 
-      await doc.loadInfo();
-      const sheet = doc.sheetsByIndex[0];
-      await sheet.addRow(body);
-
-      res
-        .status(200)
-        .json({ message: 'Successful add new order', customerInfo: body });
+      const resp = await handleResponse(response);
+      res.status(200).json(resp);
     } catch (error) {
       res.status(500).json(error);
     }
