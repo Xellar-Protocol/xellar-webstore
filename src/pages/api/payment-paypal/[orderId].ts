@@ -101,7 +101,11 @@ export default async function handler(
 
       const resp = await handleResponse(response);
       if (resp.status == 'COMPLETED')
-        addCustomer({ ...body, order_id: orderId }, client_email, private_key);
+        await addCustomer(
+          { ...body, order_id: orderId },
+          client_email,
+          private_key
+        );
 
       res.status(200).json(resp);
     } catch (error) {
