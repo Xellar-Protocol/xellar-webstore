@@ -15,7 +15,12 @@ const nextConfig = {
   // },
 
   // SVGR
-  webpack(config) {
+  target: 'serverless',
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.output.publicPath = './';
+    }
+
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
