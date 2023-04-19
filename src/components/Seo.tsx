@@ -2,18 +2,18 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 const defaultMeta = {
-  title: 'Xellar Webstore',
-  siteName: 'Xellar Wallet',
-  description: 'Buy your Xellar NFC Wallet',
+  title: 'Xellar',
+  siteName: 'Xellar',
+  description: 'The worlds most lightweight & secure hard wallet',
   /** Without additional '/' on the end, e.g. https://theodorusclarence.com */
-  url: 'https://shop.xellar.co',
+  url: 'https://xellar.co',
   type: 'website',
   robots: 'follow, index',
   /**
    * No need to be filled, will be populated with openGraph function
    * If you wish to use a normal image, just specify the path below
    */
-  image: '',
+  image: '/images/banner-hero.png',
 };
 
 type SeoProps = {

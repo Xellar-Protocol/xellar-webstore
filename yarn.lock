@@ -2069,8 +2069,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17.0.0 || ^18.0.0", "@types/react@^18.0.28":
-  "version" "18.0.28"
+"@types/react@*", "@types/react@^17.0.0 || ^18.0.0", "@types/react@^18.0.37":
+  "integrity" "sha512-4yaZZtkRN3ZIQD3KSEwkfcik8s0SWV+82dlJot1AbGYHCzJkWP3ENBY6wYeDRmKZ6HkrgoGAmR2HqdwYGp6OEw=="
+  "resolved" "https://registry.npmjs.org/@types/react/-/react-18.0.37.tgz"
+  "version" "18.0.37"
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -4871,7 +4873,9 @@
   "version" "1.0.1"
 
 "json5@^1.0.1":
-  "version" "1.0.1"
+  "integrity" "sha512-g1MWMLBiz8FKi1e4w0UyVL3w+iJceWAFBAaBnnGKOpNa5f8TLktkbre1+s6oICydWAm+HRUGTmI+//xv2hvXYA=="
+  "resolved" "https://registry.npmjs.org/json5/-/json5-1.0.2.tgz"
+  "version" "1.0.2"
   dependencies:
     "minimist" "^1.2.0"
 
@@ -6517,7 +6521,9 @@
   "version" "0.0.3"
 
 "trim-newlines@^3.0.0":
-  "version" "3.0.0"
+  "integrity" "sha512-c1PTsA3tYrIsLGkJkzHF+w9F2EyxfXGo4UyJc4pFL++FMjnq0HJS69T3M7d//gKrFKwy429bouPescbjecU+Zw=="
+  "resolved" "https://registry.npmjs.org/trim-newlines/-/trim-newlines-3.0.1.tgz"
+  "version" "3.0.1"
 
 "ts-node@^10.7.0", "ts-node@>=9.0.0":
   "version" "10.7.0"

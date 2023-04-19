@@ -15,19 +15,22 @@ export default function Card({
 }: CardProps) {
   return (
     <div className='my-4 ml-4 w-64 rounded-2xl bg-primary-400 p-5 md:my-8 md:ml-8 md:w-80 md:p-7'>
-      <div className='mb-5 flex items-center gap-5'>
-        {imageLink ? (
-          <NextImage
-            useSkeleton
-            color='#D9D9D9'
-            src={imageLink ?? ''}
-            width='50'
-            height='50'
-            alt='Icon'
-          />
-        ) : (
-          <div className='h-[50px] w-[50px] rounded-full bg-[#D9D9D9]' />
-        )}
+      <div className='mb-5 flex items-start gap-7'>
+        <div className='w-10'>
+          {imageLink ? (
+            <NextImage
+              useSkeleton
+              color='#D9D9D9'
+              src={imageLink ?? ''}
+              width='50'
+              height='50'
+              alt='Icon'
+              imgClassName='rounded-xl mt-2'
+            />
+          ) : (
+            <div className='h-[50px] w-[50px] rounded-full bg-[#D9D9D9]' />
+          )}
+        </div>
         <div>
           <p className='text-xl font-extrabold'>{name}</p>
           <p>{position}</p>
