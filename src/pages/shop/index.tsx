@@ -31,6 +31,91 @@ export default function Shop() {
     );
   }, []);
 
+  type reviewType = {
+    name: string;
+    companyName: string;
+    jobTitle: string;
+    review: string;
+    image: string;
+  };
+
+  const reviews: Array<reviewType> = [
+    {
+      name: 'Matthew',
+      companyName: 'Crypto Inc.',
+      jobTitle: 'Senior Developer',
+      review:
+        'I have been using this cryptocurrency wallet for several months now and I am thoroughly impressed with its functionality and security. The user interface is intuitive and easy to navigate, and I appreciate the added layer of security measures that have been put in place.',
+      image: '/images/person/gashashasa.png',
+    },
+    {
+      name: 'Kevin',
+      companyName: 'Swing',
+      jobTitle: 'Marketing Manager',
+      review:
+        'As someone who is not particularly tech-savvy, I was hesitant to start using a cryptocurrency wallet. However, this particular wallet made the process incredibly simple and straightforward. I now feel confident in my ability to manage my digital assets.',
+      image: '/images/person/vcjjvc bjbjjukkutuktktutuk.png',
+    },
+    {
+      name: 'Alex Johnson',
+      companyName: 'CryptoTrader LLC',
+      jobTitle: 'CEO',
+      review:
+        'This wallet is an excellent option for both beginners and experienced cryptocurrency users. It provides a comprehensive range of features and tools that are designed to meet the needs of all types of investors.',
+      image: '/images/person/zxzgzxgzxgzxgzg.png',
+    },
+    {
+      name: 'Samantha Lee',
+      companyName: 'Blockchain Ventures',
+      jobTitle: 'Investor Relations',
+      review:
+        'I have tried several cryptocurrency wallets in the past, but this one stands out as the best. It is highly secure and offers a wide range of digital assets to choose from, making it an ideal choice for anyone who wants to invest in the cryptocurrency market.',
+      image: '/images/person/woman1.jpg.png',
+    },
+    {
+      name: 'Michael Chen',
+      companyName: 'XXXXX Ventures',
+      jobTitle: 'Cryptocurrency Analyst',
+      review:
+        'As someone who works in the cryptocurrency industry, I am constantly looking for new and innovative ways to manage my digital assets. This wallet offers a level of functionality and security that I have not found in any other wallet on the market.',
+      image: '/images/person/sdaszxgxg.png',
+    },
+    {
+      name: 'Emily Davis',
+      companyName: 'Blockchain Solutions Inc.',
+      jobTitle: 'Chief Technology Officer',
+      review:
+        'This wallet is incredibly user-friendly and easy to use, which makes it a great option for beginners. It also offers a range of advanced features that are perfect for more experienced users.',
+      image: '/images/person/fqeqgqgqeg.png',
+    },
+    {
+      name: 'David Kim',
+      companyName: 'CryptoX',
+      jobTitle: 'Customer Support Representative',
+      review:
+        'One of the things I appreciate most about this wallet is the excellent customer support. Whenever I have had a question or issue, the support team has been quick to respond and incredibly helpful.',
+      image:
+        '/images/person/avatar-gen119721b1951faad477d0cfd235dfa445.jpg.png',
+    },
+    {
+      name: 'Roger Jones',
+      companyName: 'Bitcoin Investments',
+      jobTitle: 'Portfolio Manager',
+      review:
+        'I have been using this wallet to manage my digital assets for several months now and have been extremely satisfied with its performance. It is highly secure and offers a range of features that make it easy to manage a diverse portfolio of cryptocurrencies.',
+      image:
+        '/images/person/avatar-gen79879468ac6f09505f97806aa6bc5017.jpg-1.png',
+    },
+    {
+      name: 'Petru Sidarta',
+      companyName: 'CryptoVault',
+      jobTitle: 'Operation Manager',
+      review:
+        'This wallet offers an excellent combination of security and functionality, which makes it an ideal choice for anyone who wants to invest in cryptocurrencies. The team behind the wallet is also highly responsive and dedicated to providing the best possible user experience.',
+      image: '/images/person/mrykutlktjg.png',
+    },
+  ];
+
   return (
     <Layout>
       {/* <Seo templateTitle='Home' /> */}
@@ -174,13 +259,14 @@ export default function Shop() {
             <table className='hidden w-full table-auto border-collapse lg:block'>
               <tbody>
                 <tr className='border-y border-black'>
-                  <Link
-                    href='/shop/customer-info'
-                    onClick={() => {
-                      window.localStorage.setItem('amount', '1');
-                    }}
-                  >
-                    <td className='flex justify-between gap-5 p-5 xl:gap-10'>
+                  <td className='flex justify-between gap-5 p-5 xl:gap-10'>
+                    <Link
+                      href='/shop/customer-info'
+                      className='flex justify-between gap-5'
+                      onClick={() => {
+                        window.localStorage.setItem('amount', '1');
+                      }}
+                    >
                       <p>Single Card</p>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -188,7 +274,7 @@ export default function Shop() {
                         viewBox='0 0 24 24'
                         strokeWidth={1.5}
                         stroke='currentColor'
-                        className='h-6 w-6'
+                        className='mt-1 h-6 w-6'
                       >
                         <path
                           strokeLinecap='round'
@@ -196,17 +282,18 @@ export default function Shop() {
                           d='M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75'
                         />
                       </svg>
-                    </td>
-                  </Link>
+                    </Link>
+                  </td>
                 </tr>
                 <tr className='border-y border-black'>
-                  <Link
-                    href='/shop/customer-info'
-                    onClick={() => {
-                      window.localStorage.setItem('amount', '2');
-                    }}
-                  >
-                    <td className='flex justify-between gap-5 p-5 xl:gap-10'>
+                  <td className='flex justify-between gap-5 p-5 xl:gap-10'>
+                    <Link
+                      href='/shop/customer-info'
+                      onClick={() => {
+                        window.localStorage.setItem('amount', '2');
+                      }}
+                      className='flex justify-between gap-5'
+                    >
                       <p>Double Bundle</p>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -214,7 +301,7 @@ export default function Shop() {
                         viewBox='0 0 24 24'
                         strokeWidth={1.5}
                         stroke='currentColor'
-                        className='h-6 w-6'
+                        className='mt-1 h-6 w-6'
                       >
                         <path
                           strokeLinecap='round'
@@ -222,8 +309,8 @@ export default function Shop() {
                           d='M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75'
                         />
                       </svg>
-                    </td>
-                  </Link>
+                    </Link>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -304,66 +391,17 @@ export default function Shop() {
             </p>
           </div>
           <ScrollingCarousel>
-            <Card
-              name='Jason Affendi'
-              position='IDNFT Cofounder'
-              description='“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”'
-            />
-            <Card
-              name='Jason Affendi'
-              position='IDNFT Cofounder'
-              description='“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”'
-            />
-            <Card
-              name='Jason Affendi'
-              position='IDNFT Cofounder'
-              description='“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”'
-            />
-            <Card
-              name='Jason Affendi'
-              position='IDNFT Cofounder'
-              description='“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”'
-            />
-            <Card
-              name='Jason Affendi'
-              position='IDNFT Cofounder'
-              description='“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”'
-            />
-            <Card
-              name='Jason Affendi'
-              position='IDNFT Cofounder'
-              description='“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”'
-            />
-            <Card
-              name='Jason Affendi'
-              position='IDNFT Cofounder'
-              description='“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”'
-            />
-            <Card
-              name='Jason Affendi'
-              position='IDNFT Cofounder'
-              description='“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”'
-            />
-            <Card
-              name='Jason Affendi'
-              position='IDNFT Cofounder'
-              description='“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”'
-            />
-            <Card
-              name='Jason Affendi'
-              position='IDNFT Cofounder'
-              description='“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”'
-            />
-            <Card
-              name='Jason Affendi'
-              position='IDNFT Cofounder'
-              description='“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”'
-            />
-            <Card
-              name='Jason Affendi'
-              position='IDNFT Cofounder'
-              description='“Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.”'
-            />
+            {reviews.map((el) => {
+              return (
+                <Card
+                  key={el.name.toString()}
+                  name={el.name}
+                  position={`${el.companyName} - ${el.jobTitle}`}
+                  description={`“${el.review}”`}
+                  imageLink={el.image}
+                />
+              );
+            })}
           </ScrollingCarousel>
         </section>
         <section className='py-14 px-6 md:py-20 lg:py-32'>

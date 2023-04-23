@@ -7,6 +7,7 @@ import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
@@ -34,7 +35,8 @@ export default function Layout({
   const [openDownload, setOpenDownload] = React.useState(false);
   const appstoreLink =
     'https://apps.apple.com/us/app/xellar-crypto-wallet/id1671215861';
-  const playStoreLink = '';
+  const playStoreLink =
+    'https://play.google.com/store/apps/details?id=com.xellar.wallets';
 
   const PopUpMenu = ({ forceOpen = openDownload }) => {
     return (
@@ -145,13 +147,33 @@ export default function Layout({
                     </ListItemButton>
                   </Link>
                 </ListItem>
+                <ListItem>
+                  <div className='h-[1px] w-full bg-black'></div>
+                </ListItem>
                 <ListItem disablePadding>
                   <ListItemButton
                     onClick={() => setOpenDownload(!openDownload)}
                   >
-                    <div className='relative'>
-                      <h3 className='font-medium'>Download</h3>
-                      <PopUpMenu forceOpen />
+                    <div className='w-full'>
+                      <h3 className='font-medium'>Available on</h3>
+                      <div className='mt-3 flex flex-col gap-3'>
+                        <a
+                          href={appstoreLink}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          className='relative h-[40px] w-full'
+                        >
+                          <Image src='/images/app-store.png' alt='Icon' fill />
+                        </a>
+                        <a
+                          href={playStoreLink}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          className='relative h-[40px] w-full'
+                        >
+                          <Image src='/images/play-store.png' alt='Icon' fill />
+                        </a>
+                      </div>
                     </div>
                   </ListItemButton>
                 </ListItem>
