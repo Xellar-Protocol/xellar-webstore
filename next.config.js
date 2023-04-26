@@ -6,9 +6,6 @@ const nextConfig = {
 
   reactStrictMode: false,
   swcMinify: true,
-  images: {
-    unoptimized : true
-  },
 
   // Uncoment to add domain whitelist
   // images: {
@@ -18,10 +15,7 @@ const nextConfig = {
   // },
 
   // SVGR
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.output.publicPath = './';
-    }
+  webpack: (config) => {
 
     config.module.rules.push({
       test: /\.svg$/i,
