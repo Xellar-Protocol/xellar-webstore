@@ -1,0 +1,12 @@
+{
+  "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js",
+  "/404": "pages/404.html",
+  "/api/payment-paypal/[orderId]": "pages/api/payment-paypal/[orderId].js",
+  "/api/payment-paypal": "pages/api/payment-paypal.js",
+  "/": "pages/index.html",
+  "/shop/customer-info": "pages/shop/customer-info.html",
+  "/shop/payment-info": "pages/shop/payment-info.html",
+  "/shop": "pages/shop.html",
+  "/_error": "pages/_error.js"
+}
