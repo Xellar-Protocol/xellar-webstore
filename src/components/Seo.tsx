@@ -6,7 +6,7 @@ const defaultMeta = {
   siteName: 'Xellar',
   description: 'The worlds most lightweight & secure hard wallet',
   /** Without additional '/' on the end, e.g. https://theodorusclarence.com */
-  url: 'https://xellar.co',
+  url: 'https://wallet.xellar.co',
   type: 'website',
   robots: 'follow, index',
   /**
