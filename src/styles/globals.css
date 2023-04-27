@@ -135,7 +135,6 @@
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
+    @apply 3xl:rounded-tr-[30px] 3xl:rounded-tl-[30px];
   }
 }

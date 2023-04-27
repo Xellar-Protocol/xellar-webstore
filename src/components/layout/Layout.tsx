@@ -185,7 +185,7 @@ export default function Layout({
       </LayoutContainer>
       <LayoutContainer>
         <footer id='footer'>
-          <div className='grid grid-cols-4 bg-primary-800 px-10 py-6 text-white  md:py-10 lg:rounded-bl-[30px] lg:rounded-br-[30px] lg:px-24 lg:pt-16 lg:pb-36 xl:px-48'>
+          <div className='grid grid-cols-4 bg-primary-800 px-10 py-6 text-white  md:py-10 3xl:rounded-bl-[30px] 3xl:rounded-br-[30px] lg:px-24 lg:pt-16 lg:pb-36 xl:px-48'>
             <div className='col-span-4 flex flex-col gap-3 md:mb-8 lg:col-auto'>
               <LogoWhite
                 height={70}

@@ -56,6 +56,9 @@ module.exports = withMT({
         flicker: 'flicker 3s linear infinite',
         shimmer: 'shimmer 1.3s linear infinite',
       },
+      screens: {
+        '3xl': '1450px',
+      },
     },
   },
   plugins: [require('@tailwindcss/forms')],

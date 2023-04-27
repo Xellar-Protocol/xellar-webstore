@@ -127,8 +127,8 @@ export default function HomePage() {
               </div>
               <div className='order-1 rounded-2xl bg-[#EFF1F3]  bg-gradient-to-br from-[#0286DEC2] via-[#34A3EE91] to-[#DCEEFFBA] lg:order-2 lg:rounded-none '>
                 <NextImage
-                  imgClassName='mx-auto my-auto p-5 md:w-2/3 lg:w-auto lg:py-10 xl:py-0 max-h-[500px] h-full w-full max-w-[1000px]'
-                  className='h-full w-full   lg:mt-40 lg:mb-28 lg:ml-[0px] xl:ml-[-150px]'
+                  imgClassName='mx-auto my-auto p-5 md:w-2/3 lg:w-auto lg:h-auto lg:py-10 xl:py-0 2xl:max-h-[500px] 2xl:h-full w-full 2xl:max-w-[1000px]'
+                  className='h-full w-full lg:mt-40 lg:mb-28 lg:ml-[0px] xl:ml-[-150px]'
                   useSkeleton
                   src='/images/hero-image.png'
                   width='2000'
