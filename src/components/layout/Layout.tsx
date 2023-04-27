@@ -161,17 +161,15 @@ export default function Layout({
                           href={appstoreLink}
                           target='_blank'
                           rel='noopener noreferrer'
-                          className='relative h-[40px] w-full'
                         >
-                          <Image src='/images/app-store.png' alt='Icon' fill />
+                          <Image src='/images/app-store.png' className='w-full !aspect-auto' alt='Appstore' width={500} height={500} />
                         </a>
                         <a
                           href={playStoreLink}
                           target='_blank'
                           rel='noopener noreferrer'
-                          className='relative h-[40px] w-full'
                         >
-                          <Image src='/images/play-store.png' alt='Icon' fill />
+                          <Image src='/images/play-store.png' className='w-full !aspect-auto' alt='Playstore' width={500} height={500} />
                         </a>
                       </div>
                     </div>
