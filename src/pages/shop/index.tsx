@@ -427,10 +427,7 @@ export default function Shop() {
                 How safe is the Xellar Cold Wallet?
               </AccordionHeader>
               <AccordionBody className='p-3 md:py-5 md:px-0'>
-                We&apos;re not always in the position that we want to be at.
-                We&apos;re constantly growing. We&apos;re constantly making
-                mistakes. We&apos;re constantly trying to express ourselves and
-                actualize our dreams.
+                Xellar Cold Wallet is considered one of the safest options for storing cryptocurrencies. It utilizes multi-layered security measures, including a tamper-evident seal and biometric authentication, to protect your private keys and ensure that your funds are secure.
               </AccordionBody>
             </Accordion>
             <Accordion
@@ -448,10 +445,7 @@ export default function Shop() {
                 What if I lose my Cold Wallet?
               </AccordionHeader>
               <AccordionBody className='p-3 md:py-5 md:px-0'>
-                We&apos;re not always in the position that we want to be at.
-                We&apos;re constantly growing. We&apos;re constantly making
-                mistakes. We&apos;re constantly trying to express ourselves and
-                actualize our dreams.
+                If you lose your Xellar Cold Wallet, you can easily recover your funds using your recovery seed phrase. It's essential to keep your seed phrase in a safe place and not share it with anyone. Without the seed phrase, it is impossible to recover your funds.
               </AccordionBody>
             </Accordion>
             <Accordion
@@ -469,10 +463,7 @@ export default function Shop() {
                 Can I customise my card?
               </AccordionHeader>
               <AccordionBody className='p-3 md:py-5 md:px-0'>
-                We&apos;re not always in the position that we want to be at.
-                We&apos;re constantly growing. We&apos;re constantly making
-                mistakes. We&apos;re constantly trying to express ourselves and
-                actualize our dreams.
+                Yes, you can customize your Xellar Cold Wallet card. You can choose from a variety of designs, including a custom design option, which allows you to upload your own image to be printed on the card.
               </AccordionBody>
             </Accordion>
             <Accordion
@@ -490,10 +481,7 @@ export default function Shop() {
                 Can I use it with any Crypto Wallet?
               </AccordionHeader>
               <AccordionBody className='p-3 md:py-5 md:px-0'>
-                We&apos;re not always in the position that we want to be at.
-                We&apos;re constantly growing. We&apos;re constantly making
-                mistakes. We&apos;re constantly trying to express ourselves and
-                actualize our dreams.
+                Xellar Cold Wallet supports most major cryptocurrencies and can be used with any wallet that supports BIP39/BIP44 recovery seed phrases.
               </AccordionBody>
             </Accordion>
           </div>
