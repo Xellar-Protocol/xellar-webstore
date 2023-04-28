@@ -29,7 +29,7 @@ function PaymentInfo({ customer, children }: Props) {
   const router = useRouter();
   const hostedField = usePayPalHostedFields();
 
-  const [price] = React.useState<number>(19.99);
+  const [price] = React.useState<Array<string>>(['19.99', '36.99', '50.00']);
   const [open, setOpen] = React.useState(false);
   const [amount, setAmount] = React.useState(0);
   const [isDisable, setIsDisable] = React.useState(false);
@@ -138,11 +138,11 @@ function PaymentInfo({ customer, children }: Props) {
             <div className='flex items-center justify-end gap-1 md:gap-4'>
               <p className='text-sm font-medium md:text-xl'>
                 $
-                {amount == 2
-                  ? 36.99
-                  : amount == 3
-                  ? '50.00'
-                  : (price * amount).toFixed(2)}{' '}
+                {
+                  amount > 3 ?
+                    (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
+                    price[amount - 1]
+                }{' '}
                 ({amount} item)
               </p>
               <Link href='/shop'>
@@ -179,11 +179,11 @@ function PaymentInfo({ customer, children }: Props) {
               </div>
               <p>
                 $
-                {amount == 2
-                  ? 36.99
-                  : amount == 3
-                  ? '50.00'
-                  : (price * amount).toFixed(2)}
+                {
+                  amount > 3 ?
+                    (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
+                    price[amount - 1]
+                }
               </p>
             </div>
             <div className='ml-auto w-32 md:w-40'>
@@ -191,11 +191,11 @@ function PaymentInfo({ customer, children }: Props) {
                 <p>Subtotal</p>
                 <p>
                   $
-                  {amount == 2
-                    ? 36.99
-                    : amount == 3
-                    ? '50.00'
-                    : (price * amount).toFixed(2)}
+                  {
+                    amount > 3 ?
+                      (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
+                      price[amount - 1]
+                  }
                 </p>
               </div>
               <div className='flex justify-between'>
@@ -206,11 +206,11 @@ function PaymentInfo({ customer, children }: Props) {
                 <p>Total</p>
                 <p>
                   $
-                  {amount == 2
-                    ? 36.99
-                    : amount == 3
-                    ? '50.00'
-                    : (price * amount).toFixed(2)}
+                  {
+                    amount > 3 ?
+                      (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
+                      price[amount - 1]
+                  }
                 </p>
               </div>
             </div>
@@ -373,11 +373,11 @@ function PaymentInfo({ customer, children }: Props) {
                 <p>Subtotal</p>
                 <p>
                   $
-                  {amount == 2
-                    ? 36.99
-                    : amount == 3
-                    ? '50.00'
-                    : (price * amount).toFixed(2)}
+                  {
+                    amount > 3 ?
+                      (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
+                      price[amount - 1]
+                  }
                 </p>
               </div>
               <div className='flex w-full justify-between'>
@@ -388,11 +388,11 @@ function PaymentInfo({ customer, children }: Props) {
                 <p>Total</p>
                 <p>
                   $
-                  {amount == 2
-                    ? 36.99
-                    : amount == 3
-                    ? '50.00'
-                    : (price * amount).toFixed(2)}
+                  {
+                    amount > 3 ?
+                      (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
+                      price[amount - 1]
+                  }
                 </p>
               </div>
             </div>

@@ -61,12 +61,14 @@ export default async function handler(
       }
 
       const body = req.body;
+      const price = [19.99, 36.99, 50.0];
       const purchaseAmount =
-        body.amount == 2
-          ? 36.99
-          : body.amount == 3
-          ? 50.0
-          : (19.99 * body.amount).toFixed(2); // TODO: pull prices from a database
+        body.amount > 3
+          ? (
+              ((body.amount - (body.amount % 3)) / 3) * Number(price[2]) +
+              (body.amount % 3 > 0 ? Number(price[(body.amount % 3) - 1]) : 0)
+            ).toFixed(2)
+          : price[body.amount - 1]; // TODO: pull prices from a database
       const accessToken = await generateAccessToken(
         base,
         client_id,

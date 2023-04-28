@@ -47,7 +47,7 @@ export default function Layout({
               <NextImage
                 useSkeleton
                 className='w-36'
-                src='/images/app-store.png'
+                src='/images/appstore.avif'
                 width='180'
                 height='180'
                 alt='Icon'
@@ -58,7 +58,7 @@ export default function Layout({
               <NextImage
                 useSkeleton
                 className='mt-2 w-36 lg:mt-0'
-                src='/images/play-store.png'
+                src='/images/playstore.avif'
                 width='180'
                 height='180'
                 alt='Icon'
@@ -162,14 +162,14 @@ export default function Layout({
                           target='_blank'
                           rel='noopener noreferrer'
                         >
-                          <Image src='/images/app-store.png' className='w-full !aspect-auto' alt='Appstore' width={500} height={500} />
+                          <Image src='/images/appstore.avif' className='w-full !aspect-auto' alt='Appstore' width={500} height={500} />
                         </a>
                         <a
                           href={playStoreLink}
                           target='_blank'
                           rel='noopener noreferrer'
                         >
-                          <Image src='/images/play-store.png' className='w-full !aspect-auto' alt='Playstore' width={500} height={500} />
+                          <Image src='/images/playstore.avif' className='w-full !aspect-auto' alt='Playstore' width={500} height={500} />
                         </a>
                       </div>
                     </div>
@@ -201,7 +201,7 @@ export default function Layout({
                   <NextImage
                     useSkeleton
                     className='w-36'
-                    src='/images/app-store.png'
+                    src='/images/appstore.avif'
                     width='180'
                     height='180'
                     alt='Icon'
@@ -215,7 +215,7 @@ export default function Layout({
                   <NextImage
                     useSkeleton
                     className='w-36'
-                    src='/images/play-store.png'
+                    src='/images/playstore.avif'
                     width='180'
                     height='180'
                     alt='Icon'
@@ -253,7 +253,7 @@ export default function Layout({
                 <NextImage
                   useSkeleton
                   className='w-16 md:w-24'
-                  src='/images/app-store.png'
+                  src='/images/appstore.avif'
                   width='180'
                   height='180'
                   alt='Icon'
@@ -263,7 +263,7 @@ export default function Layout({
                 <NextImage
                   useSkeleton
                   className='w-16 md:w-24'
-                  src='/images/play-store.png'
+                  src='/images/playstore.avif'
                   width='180'
                   height='180'
                   alt='Icon'

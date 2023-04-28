@@ -14,7 +14,7 @@ import NextImage from '@/components/NextImage';
 import Seo from '@/components/Seo';
 
 export default function Shop() {
-  const [price] = React.useState<number>(19.99);
+  const [price] = React.useState<Array<string>>(['19.99', '36.99', '50.00']);
   const [amount, setAmount] = React.useState<number>(1);
   const [open, setOpen] = React.useState<number>(1);
   const [card, setCard] = React.useState<number>(1);
@@ -127,9 +127,8 @@ export default function Shop() {
             <p className='mb-6 hidden text-2xl lg:block'>Coming Soon</p>
             <div className='my-4 flex justify-between gap-2 text-base font-bold md:gap-4 md:text-lg lg:hidden'>
               <button
-                className={`${
-                  card === 1 ? 'bg-black text-white' : 'bg-[#EFF1F3] text-black'
-                } w-full rounded-xl py-1`}
+                className={`${card === 1 ? 'bg-black text-white' : 'bg-[#EFF1F3] text-black'
+                  } w-full rounded-xl py-1`}
                 onClick={() => {
                   setCard(1);
                   setAmount(1);
@@ -139,9 +138,8 @@ export default function Shop() {
                 Single
               </button>
               <button
-                className={`${
-                  card === 2 ? 'bg-black text-white' : 'bg-[#EFF1F3] text-black'
-                } w-full rounded-xl py-1`}
+                className={`${card === 2 ? 'bg-black text-white' : 'bg-[#EFF1F3] text-black'
+                  } w-full rounded-xl py-1`}
                 onClick={() => {
                   setCard(2);
                   setAmount(2);
@@ -151,9 +149,8 @@ export default function Shop() {
                 Double
               </button>
               <button
-                className={`${
-                  card === 3 ? 'bg-black text-white' : 'bg-[#EFF1F3] text-black'
-                } w-full rounded-xl py-1`}
+                className={`${card === 3 ? 'bg-black text-white' : 'bg-[#EFF1F3] text-black'
+                  } w-full rounded-xl py-1`}
                 onClick={() => {
                   setCard(3);
                   setAmount(3);
@@ -171,11 +168,11 @@ export default function Shop() {
             </p>
             <p className='w-7/12 text-2xl font-bold leading-loose lg:mb-16'>
               $
-              {amount == 2
-                ? 36.99
-                : amount == 3
-                ? '50.00'
-                : (price * amount).toFixed(2)}
+              {
+                amount > 3 ?
+                  (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
+                  price[amount - 1]
+              }
             </p>
             <div className='my-3 flex gap-6 md:my-6 lg:my-0'>
               <div className='flex items-center justify-center gap-3 rounded-2xl border border-gray-500 p-2'>

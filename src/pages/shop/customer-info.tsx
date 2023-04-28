@@ -13,7 +13,7 @@ import Cart from '~/svg/shopping-cart.svg';
 export default function CustomerInfo() {
   const router = useRouter();
 
-  const [price] = React.useState<number>(19.99);
+  const [price] = React.useState<Array<string>>(['19.99', '36.99', '50.00']);
   const [amount, setAmount] = React.useState(0);
   const [isValid, setIsValid] = React.useState(false);
   const [data, setData] = React.useState<any>({
@@ -36,12 +36,12 @@ export default function CustomerInfo() {
     window.localStorage.setItem('customer_info', JSON.stringify(data));
     setIsValid(
       data.first_name &&
-        data.address_1 &&
-        data.city &&
-        data.state &&
-        data.postcode &&
-        data.country &&
-        data.email_address
+      data.address_1 &&
+      data.city &&
+      data.state &&
+      data.postcode &&
+      data.country &&
+      data.email_address
     );
   };
 
@@ -67,12 +67,12 @@ export default function CustomerInfo() {
     setData({ ...data });
     setIsValid(
       data.first_name &&
-        data.address_1 &&
-        data.city &&
-        data.state &&
-        data.postcode &&
-        data.country &&
-        data.email_address
+      data.address_1 &&
+      data.city &&
+      data.state &&
+      data.postcode &&
+      data.country &&
+      data.email_address
     );
   }, []);
 
@@ -102,11 +102,11 @@ export default function CustomerInfo() {
               <div className='flex items-center justify-end gap-1 md:gap-4'>
                 <p className='text-sm font-medium md:text-xl'>
                   $
-                  {amount == 2
-                    ? 36.99
-                    : amount == 3
-                    ? '50.00'
-                    : (price * amount).toFixed(2)}{' '}
+                  {
+                    amount > 3 ?
+                      (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
+                      price[amount - 1]
+                  }{' '}
                   ({amount} item)
                 </p>
                 <Link href='/shop'>
@@ -147,11 +147,11 @@ export default function CustomerInfo() {
                 </div>
                 <p>
                   $
-                  {amount == 2
-                    ? 36.99
-                    : amount == 3
-                    ? '50.00'
-                    : (price * amount).toFixed(2)}
+                  {
+                    amount > 3 ?
+                      (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
+                      price[amount - 1]
+                  }
                 </p>
               </div>
               <div className='ml-auto w-32 md:w-40'>
@@ -159,11 +159,11 @@ export default function CustomerInfo() {
                   <p>Subtotal</p>
                   <p>
                     $
-                    {amount == 2
-                      ? 36.99
-                      : amount == 3
-                      ? '50.00'
-                      : (price * amount).toFixed(2)}
+                    {
+                      amount > 3 ?
+                        (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
+                        price[amount - 1]
+                    }
                   </p>
                 </div>
                 <div className='flex justify-between'>
@@ -174,11 +174,11 @@ export default function CustomerInfo() {
                   <p>Total</p>
                   <p>
                     $
-                    {amount == 2
-                      ? 36.99
-                      : amount == 3
-                      ? '50.00'
-                      : (price * amount).toFixed(2)}
+                    {
+                      amount > 3 ?
+                        (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
+                        price[amount - 1]
+                    }
                   </p>
                 </div>
               </div>
