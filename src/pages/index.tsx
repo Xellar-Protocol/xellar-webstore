@@ -125,10 +125,10 @@ export default function HomePage() {
                   Shop Now
                 </ButtonLink>
               </div>
-              <div className='order-1 rounded-2xl bg-[#EFF1F3]  bg-gradient-to-br from-[#0286DEC2] via-[#34A3EE91] to-[#DCEEFFBA] lg:order-2 lg:rounded-none '>
+              <div className='order-1 rounded-2xl bg-[#EFF1F3] bg-gradient-to-br from-[#0286DEC2] via-[#34A3EE91] to-[#DCEEFFBA] lg:order-2 lg:rounded-none '>
                 <NextImage
-                  imgClassName='mx-auto my-auto p-5 md:w-2/3 lg:w-auto lg:h-auto lg:py-10 xl:py-0 2xl:max-h-[500px] 2xl:h-full w-full 2xl:max-w-[1000px]'
-                  className='h-full w-full lg:mt-40 lg:mb-28 lg:ml-[0px] xl:ml-[-150px]'
+                  imgClassName='mx-auto my-auto p-5 md:w-2/3 lg:w-[750px] 2xl:w-[850px] lg:h-auto lg:py-10 2xl:py-0 2xl:px-0 w-full '
+                  className='h-full w-full lg:mt-40 2xl:mt-24 lg:mb-28 2xl:ml-[-100px]'
                   useSkeleton
                   src='/images/hero-image.png'
                   width='2000'

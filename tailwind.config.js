@@ -57,7 +57,6 @@ module.exports = withMT({
         shimmer: 'shimmer 1.3s linear infinite',
       },
       screens: {
-        '2xl': '1370px',
         '3xl': '1450px',
       },
     },
