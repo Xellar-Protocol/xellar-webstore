@@ -1,4 +1,5 @@
 import axios from 'axios';
+import HTMLParser from 'html-to-json-parser';
 import { NextApiRequest, NextApiResponse } from 'next';
 import queryString from 'query-string';
 
@@ -64,6 +65,7 @@ export default async function handler(
 
       const urlInternational = 'https://cek-ongkir.com/international/cost';
       const urlLocal = 'https://api.rajaongkir.com/starter/cost';
+      const query = queryString.stringify(body.data);
 
       const response = await axios.post(
         body.local ? urlLocal : urlInternational,
@@ -75,14 +77,32 @@ export default async function handler(
         }
       );
 
+      const data = response.data.replace(/<small>/g, '');
+      const data2 = data.replace(/<i>/g, '');
+      const indexStyle = data2.indexOf('<style ');
+      const dataFinal = data2.slice(0, indexStyle);
+
       console.log('nih');
 
+      const text =
+        '<table class=" table table-bordered"><tr><td class="bold">Dari</td><td>Jakarta Selatan , DKI Jakarta</td></tr><tr><td class="bold">Ke</td><td>Singapore</td></tr><tr><td class="bold">Berat</td><td>1 kg</td></tr></table>';
+
+      const result = await HTMLParser(dataFinal, true);
+
+      console.log(dataFinal);
+      console.log(text);
+      console.log('result', result);
+
+      // const browser = await puppeteer.launch()
+      // const page = await browser.newPage()
+
       const parser = new DOMParser();
-      const parsedHTML = parser.parseFromString(response.data, 'text/xml');
+      const parsedHTML = parser.parseFromString(text, 'text/xml');
+      console.log(parsedHTML.firstChild?.nodeName);
       const tr = parsedHTML.getElementsByTagName('tr');
       console.log(tr.length);
 
-      res.status(200).json(response.data);
+      res.status(200).json(dataFinal);
     } catch (error) {
       res.status(500).json(error);
     }
