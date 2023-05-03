@@ -7,11 +7,16 @@ import Bar from '@/components/Bar';
 import { Input } from '@/components/Input';
 import Seo from '@/components/Seo';
 
+import { cities } from '@/constant/cityId.json';
+
 import Logo from '~/svg/logo-horizontal.svg';
 import Cart from '~/svg/shopping-cart.svg';
 
 export default function CustomerInfo() {
   const router = useRouter();
+
+  const city = cities.find((item) => { return item.city_name === 'Bandung' })
+  console.log(city)
 
   const [price] = React.useState<Array<string>>(['19.99', '36.99', '50.00']);
   const [amount, setAmount] = React.useState(0);

@@ -33,10 +33,7 @@ function PaymentInfo({ customer, children }: Props) {
   const [open, setOpen] = React.useState(false);
   const [amount, setAmount] = React.useState(0);
   const [isDisable, setIsDisable] = React.useState(false);
-  const [data, setData] = React.useState<any>({
-    name: '',
-    address: '',
-  });
+  const [data, setData] = React.useState<any>({});
 
   const handleClick = () => {
     if (!hostedField?.cardFields) {
@@ -112,7 +109,47 @@ function PaymentInfo({ customer, children }: Props) {
     setData({ ...data });
   };
 
+  const getShippingRates = async (body: any) => {
+    try {
+      await axios.post('/api/shipping', body)
+        .then((res) => { console.log(res) })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   React.useEffect(() => {
+    const userData = window.localStorage.getItem('customer_info');
+    if (userData) {
+      const obj = JSON.parse(userData);
+      Object.entries(obj).map((item) => {
+        data[item[0]] = item[1];
+        setData({ ...data });
+      });
+    }
+
+    if (data?.country.toLowerCase() === 'indonesia') {
+      getShippingRates({
+        local: true,
+        data: {
+          origin: 200,
+          destination: 200,
+          courier: 'jne',
+          weight: 500
+        }
+      })
+    } else {
+      getShippingRates({
+        local: false,
+        data: {
+          origin: 153,
+          destination: 152,
+          courier: 'jne:pos:expedito:slis',
+          weight: 1
+        }
+      })
+    }
+
     setAmount(
       Number(window.localStorage.getItem('amount')) > 0
         ? Number(window.localStorage.getItem('amount'))
