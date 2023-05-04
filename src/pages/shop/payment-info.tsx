@@ -187,7 +187,7 @@ function PaymentInfo({ customer, shipping, children }: Props) {
                 {
                   amount > 3 ?
                     Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
-                    (price[amount - 1] + shipping?.data[courier].cost).toLocaleString()
+                    (Number(price[amount - 1]) + shipping?.data[courier].cost).toLocaleString()
                 }
               </p>
             </div>
@@ -199,7 +199,7 @@ function PaymentInfo({ customer, shipping, children }: Props) {
                   {
                     amount > 3 ?
                       Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
-                      (price[amount - 1] + shipping?.data[courier].cost).toLocaleString()
+                      (Number(price[amount - 1]) + shipping?.data[courier].cost).toLocaleString()
                   }
                 </p>
               </div>
@@ -214,7 +214,7 @@ function PaymentInfo({ customer, shipping, children }: Props) {
                   {
                     amount > 3 ?
                       Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0) + shipping?.data[courier].cost).toFixed(2)).toLocaleString() :
-                      (price[amount - 1] + shipping?.data[courier].cost).toLocaleString()
+                      (Number(price[amount - 1]) + shipping?.data[courier].cost).toLocaleString()
                   }
                 </p>
               </div>
@@ -379,7 +379,7 @@ function PaymentInfo({ customer, shipping, children }: Props) {
                   {
                     amount > 3 ?
                       Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
-                      (price[amount - 1] + shipping?.data[courier].cost).toLocaleString()
+                      (Number(price[amount - 1]) + shipping?.data[courier].cost).toLocaleString()
                   }
                 </p>
               </div>
@@ -394,7 +394,7 @@ function PaymentInfo({ customer, shipping, children }: Props) {
                   {
                     amount > 3 ?
                       Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0) + shipping?.data[courier].cost).toFixed(2)).toLocaleString() :
-                      (price[amount - 1] + shipping?.data[courier].cost).toLocaleString()
+                      (Number(price[amount - 1]) + shipping?.data[courier].cost).toLocaleString()
                   }
                 </p>
               </div>
