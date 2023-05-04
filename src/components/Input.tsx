@@ -132,17 +132,21 @@ export function SelectButton({
 type RadioProps = {
   label?: string;
   id: string;
+  checked?: number;
   className?: string;
   value: string[];
   description: string[];
+  onClick: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export function Radio({
   label,
   id,
+  checked,
   className,
   value,
   description,
+  onClick
 }: RadioProps) {
   return (
     <div className={`flex w-full flex-col ${className}`}>
@@ -160,6 +164,8 @@ export function Radio({
               id={id + idx.toString()}
               name={id}
               value={item}
+              checked={checked === idx}
+              onClick={() => { onClick(idx) }}
             />
             <label
               htmlFor={id + idx.toString()}

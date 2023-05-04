@@ -17,15 +17,18 @@ import Bar from '@/components/Bar';
 import { Input, Radio, SelectButton, Textarea } from '@/components/Input';
 import Seo from '@/components/Seo';
 
+import Cities from '@/constant/cityId.json';
+
 import Logo from '~/svg/logo-horizontal.svg';
 import Cart from '~/svg/shopping-cart.svg';
 
 interface Props {
   customer: any;
+  shipping: any;
   children: React.ReactNode;
 }
 
-function PaymentInfo({ customer, children }: Props) {
+function PaymentInfo({ customer, shipping, children }: Props) {
   const router = useRouter();
   const hostedField = usePayPalHostedFields();
 
@@ -34,6 +37,7 @@ function PaymentInfo({ customer, children }: Props) {
   const [amount, setAmount] = React.useState(0);
   const [isDisable, setIsDisable] = React.useState(false);
   const [data, setData] = React.useState<any>({});
+  const [courier, setCourier] = React.useState(0);
 
   const handleClick = () => {
     if (!hostedField?.cardFields) {
@@ -57,6 +61,10 @@ function PaymentInfo({ customer, children }: Props) {
       });
       return;
     }
+
+    data.courier = courier;
+    data.customer = customer;
+    setData({ ...data })
 
     setOpen(true);
     setIsDisable(true);
@@ -109,47 +117,7 @@ function PaymentInfo({ customer, children }: Props) {
     setData({ ...data });
   };
 
-  const getShippingRates = async (body: any) => {
-    try {
-      await axios.post('/api/shipping', body)
-        .then((res) => { console.log(res) })
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   React.useEffect(() => {
-    const userData = window.localStorage.getItem('customer_info');
-    if (userData) {
-      const obj = JSON.parse(userData);
-      Object.entries(obj).map((item) => {
-        data[item[0]] = item[1];
-        setData({ ...data });
-      });
-    }
-
-    if (data?.country.toLowerCase() === 'indonesia') {
-      getShippingRates({
-        local: true,
-        data: {
-          origin: 200,
-          destination: 200,
-          courier: 'jne',
-          weight: 500
-        }
-      })
-    } else {
-      getShippingRates({
-        local: false,
-        data: {
-          origin: 153,
-          destination: 152,
-          courier: 'jne:pos:expedito:slis',
-          weight: 1
-        }
-      })
-    }
-
     setAmount(
       Number(window.localStorage.getItem('amount')) > 0
         ? Number(window.localStorage.getItem('amount'))
@@ -218,8 +186,8 @@ function PaymentInfo({ customer, children }: Props) {
                 $
                 {
                   amount > 3 ?
-                    (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
-                    price[amount - 1]
+                    Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
+                    (price[amount - 1] + shipping?.data[courier].cost).toLocaleString()
                 }
               </p>
             </div>
@@ -230,14 +198,14 @@ function PaymentInfo({ customer, children }: Props) {
                   $
                   {
                     amount > 3 ?
-                      (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
-                      price[amount - 1]
+                      Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
+                      (price[amount - 1] + shipping?.data[courier].cost).toLocaleString()
                   }
                 </p>
               </div>
               <div className='flex justify-between'>
                 <p>Shipping</p>
-                <p>...</p>
+                <p>${shipping?.data[courier].cost.toLocaleString()}</p>
               </div>
               <div className='flex justify-between'>
                 <p>Total</p>
@@ -245,8 +213,8 @@ function PaymentInfo({ customer, children }: Props) {
                   $
                   {
                     amount > 3 ?
-                      (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
-                      price[amount - 1]
+                      Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0) + shipping?.data[courier].cost).toFixed(2)).toLocaleString() :
+                      (price[amount - 1] + shipping?.data[courier].cost).toLocaleString()
                   }
                 </p>
               </div>
@@ -332,12 +300,10 @@ function PaymentInfo({ customer, children }: Props) {
                 <Radio
                   label='Shipping'
                   id='shipping'
-                  value={['Instant', 'Next Day', 'Standard Delivery']}
-                  description={[
-                    'Rp.11,000 - Rp.13,000',
-                    'Rp.11,000 - Rp.13,000',
-                    'Rp.11,000 - Rp.13,000',
-                  ]}
+                  checked={courier}
+                  onClick={setCourier}
+                  value={shipping?.name}
+                  description={shipping?.price}
                 />
                 <div className='flex justify-end gap-5'>
                   <Image
@@ -412,14 +378,14 @@ function PaymentInfo({ customer, children }: Props) {
                   $
                   {
                     amount > 3 ?
-                      (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
-                      price[amount - 1]
+                      Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
+                      (price[amount - 1] + shipping?.data[courier].cost).toLocaleString()
                   }
                 </p>
               </div>
               <div className='flex w-full justify-between'>
                 <p>Shipping</p>
-                <p>$4.00</p>
+                <p>${shipping?.data[courier].cost.toLocaleString()}</p>
               </div>
               <div className='flex w-full justify-between'>
                 <p>Total</p>
@@ -427,8 +393,8 @@ function PaymentInfo({ customer, children }: Props) {
                   $
                   {
                     amount > 3 ?
-                      (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
-                      price[amount - 1]
+                      Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0) + shipping?.data[courier].cost).toFixed(2)).toLocaleString() :
+                      (price[amount - 1] + shipping?.data[courier].cost).toLocaleString()
                   }
                 </p>
               </div>
@@ -469,6 +435,11 @@ export default function Payment() {
   const router = useRouter();
 
   const [clientToken, setClientToken] = React.useState('');
+  const [shippingRates, setShippingRates] = React.useState<any>({
+    name: [],
+    price: [],
+    data: []
+  })
   const [data, setData] = React.useState<any>({
     first_name: '',
     last_name: '',
@@ -492,6 +463,26 @@ export default function Payment() {
     }
   };
 
+  const getShippingRates = async (body: any) => {
+    try {
+      await axios.post('/api/shipping', body)
+        .then((res) => {
+          if (res.status === 200) {
+            const name: any[] = []
+            const price: any[] = []
+            res.data.map((item: any) => {
+              name.push(item.name)
+              price.push(`${data?.country.toLowerCase() === 'indonesia' ? 'Rp.' : "US$"} ${item.cost.toLocaleString()}`)
+            })
+            setShippingRates({ name, price, data: res.data })
+          }
+          else setShippingRates({ name: [], price: [], data: [] })
+        })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   React.useEffect(() => {
     const userData = window.localStorage.getItem('customer_info');
 
@@ -505,6 +496,30 @@ export default function Payment() {
       });
     } else {
       router.push('/shop/customer-info');
+    }
+
+    if (data?.country.toLowerCase() === 'indonesia') {
+      const city = Cities.cities.find((item) => { return item.city_name.toLowerCase() === data?.city.toLowerCase() })
+      getShippingRates({
+        local: true,
+        data: {
+          origin: 153,
+          destination: city?.city_id,
+          courier: 'jne',
+          weight: 500
+        }
+      })
+    } else {
+      const country = Cities.country.find((item) => { return item.country_name.toLowerCase() === data?.country.toLowerCase() })
+      getShippingRates({
+        local: false,
+        data: {
+          origin: 153,
+          destination: country?.country_id,
+          courier: 'jne:pos',
+          weight: 1
+        }
+      })
     }
 
     data.amount =
@@ -521,7 +536,7 @@ export default function Payment() {
       <Seo />
 
       <main>
-        {clientToken ? (
+        {clientToken && shippingRates.name.length ? (
           <PayPalScriptProvider
             options={{
               'client-id': process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ?? '',
@@ -552,7 +567,7 @@ export default function Payment() {
                   });
               }}
             >
-              <PaymentInfo customer={data}>
+              <PaymentInfo customer={data} shipping={shippingRates}>
                 <div className='grid grid-cols-10 gap-3'>
                   <div className='col-span-10 flex w-full flex-col md:col-span-6'>
                     <label htmlFor='card-number' className='mb-3 font-medium'>

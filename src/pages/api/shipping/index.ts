@@ -3,52 +3,6 @@ import * as cheerio from 'cheerio';
 import { NextApiRequest, NextApiResponse } from 'next';
 import queryString from 'query-string';
 
-// call this function to create your client token
-async function generateClientToken(
-  base: string,
-  client_id: string,
-  app_secret: string
-) {
-  const accessToken = await generateAccessToken(base, client_id, app_secret);
-  const response = await fetch(`${base}/v1/identity/generate-token`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      'Accept-Language': 'en_US',
-      'Content-Type': 'application/json',
-    },
-  });
-  const data = await handleResponse(response);
-  return data.client_token;
-}
-
-// access token is used to authenticate all REST API requests
-async function generateAccessToken(
-  base: string,
-  client_id: string,
-  app_secret: string
-) {
-  const auth = Buffer.from(client_id + ':' + app_secret).toString('base64');
-  const response = await fetch(`${base}/v1/oauth2/token`, {
-    method: 'POST',
-    body: 'grant_type=client_credentials',
-    headers: {
-      Authorization: `Basic ${auth}`,
-    },
-  });
-  const data = await handleResponse(response);
-  return data.access_token;
-}
-
-async function handleResponse(response: any) {
-  if (response.status === 200 || response.status === 201) {
-    return response.json();
-  }
-
-  const errorMessage = await response.text();
-  throw new Error(errorMessage);
-}
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -61,11 +15,14 @@ export default async function handler(
         throw new Error('Missing Shipping key');
       }
 
+      const currencyRate = await axios.get(
+        'https://api.ofx.com/PublicSite.ApiService/OFX/spotrate/Individual/IDR/USD/1?format=json'
+      );
+
       const body = req.body;
 
       const urlInternational = 'https://cek-ongkir.com/international/cost';
       const urlLocal = 'https://api.rajaongkir.com/starter/cost';
-      const query = queryString.stringify(body.data);
 
       const response = await axios.post(
         body.local ? urlLocal : urlInternational,
@@ -77,14 +34,63 @@ export default async function handler(
         }
       );
 
-      console.log('nih');
-      const $ = cheerio.load(response.data);
-      $('.cell').each((index, elem) => {
-        console.log($(elem).text());
-        console.log('--');
-      });
+      let resp: any[] = [];
 
-      res.status(200).json('');
+      if (body.local) {
+        response.data.rajaongkir.results[0].costs.map((item: any) => {
+          const res = {
+            name:
+              item.service === 'OKE'
+                ? 'Economical'
+                : item.service.includes('YES')
+                ? 'Next Day'
+                : 'Regular',
+            est: item.cost[0].etd,
+            cost: item.cost[0].value,
+          };
+          resp.push(res);
+        });
+      } else {
+        const data: any[] = [];
+        const final: any[] = [];
+
+        const $ = cheerio.load(response.data);
+        $('.cell').each((index, elem) => {
+          data.push($(elem).text());
+        });
+
+        data.map((item, index) => {
+          if (index % 3 === 0) {
+            if (item.includes('JNE') || item.includes('EMS')) {
+              const price = data[index + 1].includes('IDR')
+                ? Math.ceil(
+                    data[index + 1].split(' ')[1] *
+                      currencyRate.data.InterbankRate
+                  )
+                : Number(data[index + 1].split(' ')[1]);
+              const courier = {
+                name: item,
+                est: data[index + 2],
+                cost: price,
+              };
+              final.push(courier);
+            }
+          }
+        });
+
+        final.sort((a, b) => {
+          return a.cost - b.cost;
+        });
+
+        final.map((item, idx) => {
+          item.name =
+            idx === 0 ? 'Economical' : idx === 1 ? 'Regular' : 'Express';
+        });
+
+        resp = final;
+      }
+
+      res.status(200).json(resp);
     } catch (error) {
       res.status(500).json(error);
     }
