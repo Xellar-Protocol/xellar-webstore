@@ -13,7 +13,7 @@ import Cart from '~/svg/shopping-cart.svg';
 export default function CustomerInfo() {
   const router = useRouter();
 
-  const [price] = React.useState<Array<string>>(['19.99', '36.99', '50.00']);
+  const [price] = React.useState<Array<number>>([19.99, 36.99, 50.00]);
   const [amount, setAmount] = React.useState(0);
   const [isValid, setIsValid] = React.useState(false);
   const [data, setData] = React.useState<any>({
@@ -104,8 +104,8 @@ export default function CustomerInfo() {
                   $
                   {
                     amount > 3 ?
-                      (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
-                      price[amount - 1]
+                      Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
+                      Number(price[amount - 1]).toLocaleString()
                   }{' '}
                   ({amount} item)
                 </p>
@@ -149,8 +149,8 @@ export default function CustomerInfo() {
                   $
                   {
                     amount > 3 ?
-                      (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
-                      price[amount - 1]
+                      Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
+                      Number(price[amount - 1]).toLocaleString()
                   }
                 </p>
               </div>
@@ -161,8 +161,8 @@ export default function CustomerInfo() {
                     $
                     {
                       amount > 3 ?
-                        (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
-                        price[amount - 1]
+                        Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
+                        Number(price[amount - 1]).toLocaleString()
                     }
                   </p>
                 </div>
@@ -176,8 +176,8 @@ export default function CustomerInfo() {
                     $
                     {
                       amount > 3 ?
-                        (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
-                        price[amount - 1]
+                        Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
+                        Number(price[amount - 1]).toLocaleString()
                     }
                   </p>
                 </div>

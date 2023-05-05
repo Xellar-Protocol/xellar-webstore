@@ -14,7 +14,7 @@ import NextImage from '@/components/NextImage';
 import Seo from '@/components/Seo';
 
 export default function Shop() {
-  const [price] = React.useState<Array<string>>(['19.99', '36.99', '50.00']);
+  const [price] = React.useState<Array<number>>([19.99, 36.99, 50.00]);
   const [amount, setAmount] = React.useState<number>(1);
   const [open, setOpen] = React.useState<number>(1);
   const [card, setCard] = React.useState<number>(1);
@@ -170,8 +170,8 @@ export default function Shop() {
               $
               {
                 amount > 3 ?
-                  (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
-                  price[amount - 1]
+                  Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
+                  Number(price[amount - 1]).toLocaleString()
               }
             </p>
             <div className='my-3 flex gap-6 md:my-6 lg:my-0'>

@@ -136,7 +136,7 @@ type RadioProps = {
   className?: string;
   value: string[];
   description: string[];
-  onClick: React.Dispatch<React.SetStateAction<number>>;
+  onClick: (index: number) => void;
 };
 
 export function Radio({

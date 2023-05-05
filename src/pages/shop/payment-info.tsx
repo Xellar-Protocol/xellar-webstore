@@ -32,12 +32,17 @@ function PaymentInfo({ customer, shipping, children }: Props) {
   const router = useRouter();
   const hostedField = usePayPalHostedFields();
 
-  const [price] = React.useState<Array<string>>(['19.99', '36.99', '50.00']);
+  const [price] = React.useState<Array<number>>([19.99, 36.99, 50.00]);
   const [open, setOpen] = React.useState(false);
   const [amount, setAmount] = React.useState(0);
   const [isDisable, setIsDisable] = React.useState(false);
   const [data, setData] = React.useState<any>({});
   const [courier, setCourier] = React.useState(0);
+
+  const getCourier = (index: number) => {
+    setCourier(index)
+    window.localStorage.setItem('courier', index.toString())
+  }
 
   const handleClick = () => {
     if (!hostedField?.cardFields) {
@@ -63,7 +68,6 @@ function PaymentInfo({ customer, shipping, children }: Props) {
     }
 
     data.courier = courier;
-    data.customer = customer;
     setData({ ...data })
 
     setOpen(true);
@@ -145,8 +149,8 @@ function PaymentInfo({ customer, shipping, children }: Props) {
                 $
                 {
                   amount > 3 ?
-                    (((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2).toString() :
-                    price[amount - 1]
+                    Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
+                    Number(price[amount - 1]).toLocaleString()
                 }{' '}
                 ({amount} item)
               </p>
@@ -187,7 +191,7 @@ function PaymentInfo({ customer, shipping, children }: Props) {
                 {
                   amount > 3 ?
                     Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
-                    (Number(price[amount - 1]) + shipping?.data[courier].cost).toLocaleString()
+                    Number(price[amount - 1]).toLocaleString()
                 }
               </p>
             </div>
@@ -199,7 +203,7 @@ function PaymentInfo({ customer, shipping, children }: Props) {
                   {
                     amount > 3 ?
                       Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
-                      (Number(price[amount - 1]) + shipping?.data[courier].cost).toLocaleString()
+                      Number(price[amount - 1]).toLocaleString()
                   }
                 </p>
               </div>
@@ -301,7 +305,7 @@ function PaymentInfo({ customer, shipping, children }: Props) {
                   label='Shipping'
                   id='shipping'
                   checked={courier}
-                  onClick={setCourier}
+                  onClick={getCourier}
                   value={shipping?.name}
                   description={shipping?.price}
                 />
@@ -379,7 +383,7 @@ function PaymentInfo({ customer, shipping, children }: Props) {
                   {
                     amount > 3 ?
                       Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
-                      (Number(price[amount - 1]) + shipping?.data[courier].cost).toLocaleString()
+                      Number(price[amount - 1]).toLocaleString()
                   }
                 </p>
               </div>
@@ -472,7 +476,7 @@ export default function Payment() {
             const price: any[] = []
             res.data.map((item: any) => {
               name.push(item.name)
-              price.push(`${data?.country.toLowerCase() === 'indonesia' ? 'Rp.' : "US$"} ${item.cost.toLocaleString()}`)
+              price.push(`US$ ${item.cost.toLocaleString()}`)
             })
             setShippingRates({ name, price, data: res.data })
           }
@@ -550,12 +554,14 @@ export default function Payment() {
                 '.invalid': { color: '#dc3545' },
               }}
               createOrder={function () {
+                const courierIndex = window.localStorage.getItem('courier')
+
                 return fetch('/api/payment-paypal', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
                   },
-                  body: JSON.stringify(data),
+                  body: JSON.stringify({ ...data, courier: courierIndex }),
                 })
                   .then((response) => response.json())
                   .then((order) => {
