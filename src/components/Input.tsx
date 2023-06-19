@@ -146,7 +146,7 @@ export function Radio({
   className,
   value,
   description,
-  onClick
+  onClick,
 }: RadioProps) {
   return (
     <div className={`flex w-full flex-col ${className}`}>
@@ -165,7 +165,9 @@ export function Radio({
               name={id}
               value={item}
               checked={checked === idx}
-              onClick={() => { onClick(idx) }}
+              onClick={() => {
+                onClick(idx);
+              }}
             />
             <label
               htmlFor={id + idx.toString()}

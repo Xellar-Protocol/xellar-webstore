@@ -170,8 +170,16 @@ export default function Shop() {
               $
               {
                 amount > 3 ?
-                  Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
-                  Number(price[amount - 1]).toLocaleString()
+                  Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString(undefined,
+                    {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    }) :
+                  Number(price[amount - 1]).toLocaleString(undefined,
+                    {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })
               }
             </p>
             <div className='my-3 flex gap-6 md:my-6 lg:my-0'>

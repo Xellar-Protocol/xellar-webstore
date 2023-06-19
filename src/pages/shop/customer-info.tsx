@@ -1,4 +1,5 @@
 import { Button, Card, Typography } from '@material-tailwind/react';
+import Autocomplete from '@mui/material/Autocomplete';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
@@ -7,13 +8,15 @@ import Bar from '@/components/Bar';
 import { Input } from '@/components/Input';
 import Seo from '@/components/Seo';
 
+import Cities from '@/constant/cityId.json';
+
 import Logo from '~/svg/logo-horizontal.svg';
 import Cart from '~/svg/shopping-cart.svg';
 
 export default function CustomerInfo() {
   const router = useRouter();
 
-  const [price] = React.useState<Array<number>>([19.99, 36.99, 50.00]);
+  const [price] = React.useState<Array<number>>([19.99, 36.99, 50.0]);
   const [amount, setAmount] = React.useState(0);
   const [isValid, setIsValid] = React.useState(false);
   const [data, setData] = React.useState<any>({
@@ -36,12 +39,12 @@ export default function CustomerInfo() {
     window.localStorage.setItem('customer_info', JSON.stringify(data));
     setIsValid(
       data.first_name &&
-      data.address_1 &&
-      data.city &&
-      data.state &&
-      data.postcode &&
-      data.country &&
-      data.email_address
+        data.address_1 &&
+        data.city &&
+        data.state &&
+        data.postcode &&
+        data.country &&
+        data.email_address
     );
   };
 
@@ -67,12 +70,12 @@ export default function CustomerInfo() {
     setData({ ...data });
     setIsValid(
       data.first_name &&
-      data.address_1 &&
-      data.city &&
-      data.state &&
-      data.postcode &&
-      data.country &&
-      data.email_address
+        data.address_1 &&
+        data.city &&
+        data.state &&
+        data.postcode &&
+        data.country &&
+        data.email_address
     );
   }, []);
 
@@ -102,11 +105,20 @@ export default function CustomerInfo() {
               <div className='flex items-center justify-end gap-1 md:gap-4'>
                 <p className='text-sm font-medium md:text-xl'>
                   $
-                  {
-                    amount > 3 ?
-                      Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
-                      Number(price[amount - 1]).toLocaleString()
-                  }{' '}
+                  {amount > 3
+                    ? Number(
+                        (
+                          ((amount - (amount % 3)) / 3) * Number(price[2]) +
+                          (amount % 3 > 0 ? Number(price[(amount % 3) - 1]) : 0)
+                        ).toFixed(2)
+                      ).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })
+                    : Number(price[amount - 1]).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}{' '}
                   ({amount} item)
                 </p>
                 <Link href='/shop'>
@@ -147,11 +159,20 @@ export default function CustomerInfo() {
                 </div>
                 <p>
                   $
-                  {
-                    amount > 3 ?
-                      Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
-                      Number(price[amount - 1]).toLocaleString()
-                  }
+                  {amount > 3
+                    ? Number(
+                        (
+                          ((amount - (amount % 3)) / 3) * Number(price[2]) +
+                          (amount % 3 > 0 ? Number(price[(amount % 3) - 1]) : 0)
+                        ).toFixed(2)
+                      ).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })
+                    : Number(price[amount - 1]).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                 </p>
               </div>
               <div className='ml-auto w-32 md:w-40'>
@@ -159,11 +180,22 @@ export default function CustomerInfo() {
                   <p>Subtotal</p>
                   <p>
                     $
-                    {
-                      amount > 3 ?
-                        Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
-                        Number(price[amount - 1]).toLocaleString()
-                    }
+                    {amount > 3
+                      ? Number(
+                          (
+                            ((amount - (amount % 3)) / 3) * Number(price[2]) +
+                            (amount % 3 > 0
+                              ? Number(price[(amount % 3) - 1])
+                              : 0)
+                          ).toFixed(2)
+                        ).toLocaleString(undefined, {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })
+                      : Number(price[amount - 1]).toLocaleString(undefined, {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
                   </p>
                 </div>
                 <div className='flex justify-between'>
@@ -174,11 +206,22 @@ export default function CustomerInfo() {
                   <p>Total</p>
                   <p>
                     $
-                    {
-                      amount > 3 ?
-                        Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
-                        Number(price[amount - 1]).toLocaleString()
-                    }
+                    {amount > 3
+                      ? Number(
+                          (
+                            ((amount - (amount % 3)) / 3) * Number(price[2]) +
+                            (amount % 3 > 0
+                              ? Number(price[(amount % 3) - 1])
+                              : 0)
+                          ).toFixed(2)
+                        ).toLocaleString(undefined, {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })
+                      : Number(price[amount - 1]).toLocaleString(undefined, {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
                   </p>
                 </div>
               </div>
@@ -231,16 +274,104 @@ export default function CustomerInfo() {
                     value={data.address_2}
                     onChange={updateData}
                   />
+                  <Autocomplete
+                    disablePortal
+                    id='country'
+                    onSelect={updateData}
+                    options={Cities.country.map(
+                      (option) => option.country_name
+                    )}
+                    sx={{
+                      '& input': {
+                        borderRadius: '0.75rem',
+                        borderColor: '#BBB9B9',
+                        transitionDuration: '300ms',
+                        transitionTimingFunction: 'ease-in-out',
+                        ':focus': {
+                          '--tw-ring-opacity': 1,
+                          '--tw-ring-color':
+                            'rgb(0 0 0 / var(--tw-ring-opacity))',
+                          '--tw-ring-offset-shadow':
+                            'var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)',
+                          '--tw-ring-shadow':
+                            'var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+                          'box-shadow':
+                            'var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)',
+                        },
+                      },
+                    }}
+                    renderInput={(params) => (
+                      <div
+                        className='flex w-full flex-col'
+                        ref={params.InputProps.ref}
+                      >
+                        <label className='mb-3 font-medium'>
+                          Country <span className='text-red-700'>*</span>
+                        </label>
+                        <input
+                          type='text'
+                          className='autocomplete'
+                          {...params.inputProps}
+                        />
+                      </div>
+                    )}
+                  />
                   <div className='grid grid-cols-10 gap-3'>
-                    <Input
-                      type='text'
-                      label='City'
-                      id='city'
-                      className='col-span-10 md:col-span-6'
-                      required
-                      value={data.city}
-                      onChange={updateData}
-                    />
+                    {data.country === 'Indonesia' ? (
+                      <Autocomplete
+                        disablePortal
+                        id='city'
+                        onSelect={updateData}
+                        className='col-span-10 md:col-span-6'
+                        options={Cities.cities.map(
+                          (option) => option.city_name
+                        )}
+                        sx={{
+                          '& input': {
+                            borderRadius: '0.75rem',
+                            borderColor: '#BBB9B9',
+                            transitionDuration: '300ms',
+                            transitionTimingFunction: 'ease-in-out',
+                            ':focus': {
+                              '--tw-ring-opacity': 1,
+                              '--tw-ring-color':
+                                'rgb(0 0 0 / var(--tw-ring-opacity))',
+                              '--tw-ring-offset-shadow':
+                                'var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)',
+                              '--tw-ring-shadow':
+                                'var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+                              'box-shadow':
+                                'var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)',
+                            },
+                          },
+                        }}
+                        renderInput={(params) => (
+                          <div
+                            className='col-span-10 flex w-full flex-col md:col-span-6'
+                            ref={params.InputProps.ref}
+                          >
+                            <label className='mb-3 font-medium'>
+                              City <span className='text-red-700'>*</span>
+                            </label>
+                            <input
+                              type='text'
+                              className='autocomplete'
+                              {...params.inputProps}
+                            />
+                          </div>
+                        )}
+                      />
+                    ) : (
+                      <Input
+                        type='text'
+                        label='City'
+                        id='city'
+                        className='col-span-10 md:col-span-6'
+                        required
+                        value={data.city}
+                        onChange={updateData}
+                      />
+                    )}
                     <Input
                       type='text'
                       label='State'
@@ -262,14 +393,6 @@ export default function CustomerInfo() {
                       onChange={updateData}
                     />
                   </div>
-                  <Input
-                    type='text'
-                    label='Country'
-                    id='country'
-                    required
-                    value={data.country}
-                    onChange={updateData}
-                  />
                   <Input
                     type='text'
                     label='Email Address'

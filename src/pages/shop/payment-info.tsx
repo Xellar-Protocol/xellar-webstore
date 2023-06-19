@@ -32,7 +32,7 @@ function PaymentInfo({ customer, shipping, children }: Props) {
   const router = useRouter();
   const hostedField = usePayPalHostedFields();
 
-  const [price] = React.useState<Array<number>>([19.99, 36.99, 50.00]);
+  const [price] = React.useState<Array<number>>([19.99, 36.99, 50.0]);
   const [open, setOpen] = React.useState(false);
   const [amount, setAmount] = React.useState(0);
   const [isDisable, setIsDisable] = React.useState(false);
@@ -40,9 +40,9 @@ function PaymentInfo({ customer, shipping, children }: Props) {
   const [courier, setCourier] = React.useState(0);
 
   const getCourier = (index: number) => {
-    setCourier(index)
-    window.localStorage.setItem('courier', index.toString())
-  }
+    setCourier(index);
+    window.localStorage.setItem('courier', index.toString());
+  };
 
   const handleClick = () => {
     if (!hostedField?.cardFields) {
@@ -68,7 +68,7 @@ function PaymentInfo({ customer, shipping, children }: Props) {
     }
 
     data.courier = courier;
-    setData({ ...data })
+    setData({ ...data });
 
     setOpen(true);
     setIsDisable(true);
@@ -147,11 +147,20 @@ function PaymentInfo({ customer, shipping, children }: Props) {
             <div className='flex items-center justify-end gap-1 md:gap-4'>
               <p className='text-sm font-medium md:text-xl'>
                 $
-                {
-                  amount > 3 ?
-                    Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
-                    Number(price[amount - 1]).toLocaleString()
-                }{' '}
+                {amount > 3
+                  ? Number(
+                      (
+                        ((amount - (amount % 3)) / 3) * Number(price[2]) +
+                        (amount % 3 > 0 ? Number(price[(amount % 3) - 1]) : 0)
+                      ).toFixed(2)
+                    ).toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })
+                  : Number(price[amount - 1]).toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}{' '}
                 ({amount} item)
               </p>
               <Link href='/shop'>
@@ -188,11 +197,20 @@ function PaymentInfo({ customer, shipping, children }: Props) {
               </div>
               <p>
                 $
-                {
-                  amount > 3 ?
-                    Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
-                    Number(price[amount - 1]).toLocaleString()
-                }
+                {amount > 3
+                  ? Number(
+                      (
+                        ((amount - (amount % 3)) / 3) * Number(price[2]) +
+                        (amount % 3 > 0 ? Number(price[(amount % 3) - 1]) : 0)
+                      ).toFixed(2)
+                    ).toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })
+                  : Number(price[amount - 1]).toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
               </p>
             </div>
             <div className='ml-auto w-32 md:w-40'>
@@ -200,26 +218,55 @@ function PaymentInfo({ customer, shipping, children }: Props) {
                 <p>Subtotal</p>
                 <p>
                   $
-                  {
-                    amount > 3 ?
-                      Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
-                      Number(price[amount - 1]).toLocaleString()
-                  }
+                  {amount > 3
+                    ? Number(
+                        (
+                          ((amount - (amount % 3)) / 3) * Number(price[2]) +
+                          (amount % 3 > 0 ? Number(price[(amount % 3) - 1]) : 0)
+                        ).toFixed(2)
+                      ).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })
+                    : Number(price[amount - 1]).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                 </p>
               </div>
               <div className='flex justify-between'>
                 <p>Shipping</p>
-                <p>${shipping?.data[courier].cost.toLocaleString()}</p>
+                <p>
+                  $
+                  {shipping?.data[courier].cost.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </p>
               </div>
               <div className='flex justify-between'>
                 <p>Total</p>
                 <p>
                   $
-                  {
-                    amount > 3 ?
-                      Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0) + shipping?.data[courier].cost).toFixed(2)).toLocaleString() :
-                      (Number(price[amount - 1]) + shipping?.data[courier].cost).toLocaleString()
-                  }
+                  {amount > 3
+                    ? Number(
+                        (
+                          ((amount - (amount % 3)) / 3) * Number(price[2]) +
+                          (amount % 3 > 0
+                            ? Number(price[(amount % 3) - 1])
+                            : 0) +
+                          shipping?.data[courier].cost
+                        ).toFixed(2)
+                      ).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })
+                    : (
+                        Number(price[amount - 1]) + shipping?.data[courier].cost
+                      ).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                 </p>
               </div>
             </div>
@@ -380,26 +427,55 @@ function PaymentInfo({ customer, shipping, children }: Props) {
                 <p>Subtotal</p>
                 <p>
                   $
-                  {
-                    amount > 3 ?
-                      Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0)).toFixed(2)).toLocaleString() :
-                      Number(price[amount - 1]).toLocaleString()
-                  }
+                  {amount > 3
+                    ? Number(
+                        (
+                          ((amount - (amount % 3)) / 3) * Number(price[2]) +
+                          (amount % 3 > 0 ? Number(price[(amount % 3) - 1]) : 0)
+                        ).toFixed(2)
+                      ).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })
+                    : Number(price[amount - 1]).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                 </p>
               </div>
               <div className='flex w-full justify-between'>
                 <p>Shipping</p>
-                <p>${shipping?.data[courier].cost.toLocaleString()}</p>
+                <p>
+                  $
+                  {shipping?.data[courier].cost.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </p>
               </div>
               <div className='flex w-full justify-between'>
                 <p>Total</p>
                 <p>
                   $
-                  {
-                    amount > 3 ?
-                      Number((((amount - (amount % 3)) / 3) * Number(price[2]) + (amount % 3 > 0 ? Number(price[amount % 3 - 1]) : 0) + shipping?.data[courier].cost).toFixed(2)).toLocaleString() :
-                      (Number(price[amount - 1]) + shipping?.data[courier].cost).toLocaleString()
-                  }
+                  {amount > 3
+                    ? Number(
+                        (
+                          ((amount - (amount % 3)) / 3) * Number(price[2]) +
+                          (amount % 3 > 0
+                            ? Number(price[(amount % 3) - 1])
+                            : 0) +
+                          shipping?.data[courier].cost
+                        ).toFixed(2)
+                      ).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })
+                    : (
+                        Number(price[amount - 1]) + shipping?.data[courier].cost
+                      ).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                 </p>
               </div>
             </div>
@@ -442,8 +518,8 @@ export default function Payment() {
   const [shippingRates, setShippingRates] = React.useState<any>({
     name: [],
     price: [],
-    data: []
-  })
+    data: [],
+  });
   const [data, setData] = React.useState<any>({
     first_name: '',
     last_name: '',
@@ -469,23 +545,26 @@ export default function Payment() {
 
   const getShippingRates = async (body: any) => {
     try {
-      await axios.post('/api/shipping', body)
-        .then((res) => {
-          if (res.status === 200) {
-            const name: any[] = []
-            const price: any[] = []
-            res.data.map((item: any) => {
-              name.push(item.name)
-              price.push(`US$ ${item.cost.toLocaleString()}`)
-            })
-            setShippingRates({ name, price, data: res.data })
-          }
-          else setShippingRates({ name: [], price: [], data: [] })
-        })
+      await axios.post('/api/shipping', body).then((res) => {
+        if (res.status === 200) {
+          const name: any[] = [];
+          const price: any[] = [];
+          res.data.map((item: any) => {
+            name.push(item.name);
+            price.push(
+              `US$ ${item.cost.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}`
+            );
+          });
+          setShippingRates({ name, price, data: res.data });
+        } else setShippingRates({ name: [], price: [], data: [] });
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   React.useEffect(() => {
     const userData = window.localStorage.getItem('customer_info');
@@ -503,27 +582,31 @@ export default function Payment() {
     }
 
     if (data?.country.toLowerCase() === 'indonesia') {
-      const city = Cities.cities.find((item) => { return item.city_name.toLowerCase() === data?.city.toLowerCase() })
+      const city = Cities.cities.find((item) => {
+        return item.city_name.toLowerCase() === data?.city.toLowerCase();
+      });
       getShippingRates({
         local: true,
         data: {
           origin: 153,
           destination: city?.city_id,
           courier: 'jne',
-          weight: 500
-        }
-      })
+          weight: 500,
+        },
+      });
     } else {
-      const country = Cities.country.find((item) => { return item.country_name.toLowerCase() === data?.country.toLowerCase() })
+      const country = Cities.country.find((item) => {
+        return item.country_name.toLowerCase() === data?.country.toLowerCase();
+      });
       getShippingRates({
         local: false,
         data: {
           origin: 153,
           destination: country?.country_id,
           courier: 'jne:pos',
-          weight: 1
-        }
-      })
+          weight: 1,
+        },
+      });
     }
 
     data.amount =
@@ -554,7 +637,7 @@ export default function Payment() {
                 '.invalid': { color: '#dc3545' },
               }}
               createOrder={function () {
-                const courierIndex = window.localStorage.getItem('courier')
+                const courierIndex = window.localStorage.getItem('courier');
 
                 return fetch('/api/payment-paypal', {
                   method: 'POST',
