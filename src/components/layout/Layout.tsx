@@ -15,10 +15,10 @@ import * as React from 'react';
 import LayoutContainer from '@/components/layout/LayoutContainer';
 import NextImage from '@/components/NextImage';
 
-import Discord from '~/svg/discord.svg';
 import Instagram from '~/svg/instagram.svg';
 import Logo from '~/svg/logo-horizontal.svg';
 import LogoWhite from '~/svg/logo-horizontal-white.svg';
+import Medium from '~/svg/medium-seeklogo.com.svg';
 import Cart from '~/svg/shopping-cart.svg';
 import Twitter from '~/svg/twitter.svg';
 
@@ -162,14 +162,26 @@ export default function Layout({
                           target='_blank'
                           rel='noopener noreferrer'
                         >
-                          <Image src='/images/appstore.avif' className='w-full !aspect-auto' alt='Appstore' width={500} height={500} />
+                          <Image
+                            src='/images/appstore.avif'
+                            className='!aspect-auto w-full'
+                            alt='Appstore'
+                            width={500}
+                            height={500}
+                          />
                         </a>
                         <a
                           href={playStoreLink}
                           target='_blank'
                           rel='noopener noreferrer'
                         >
-                          <Image src='/images/playstore.avif' className='w-full !aspect-auto' alt='Playstore' width={500} height={500} />
+                          <Image
+                            src='/images/playstore.avif'
+                            className='!aspect-auto w-full'
+                            alt='Playstore'
+                            width={500}
+                            height={500}
+                          />
                         </a>
                       </div>
                     </div>
@@ -185,7 +197,7 @@ export default function Layout({
       </LayoutContainer>
       <LayoutContainer>
         <footer id='footer'>
-          <div className='grid grid-cols-4 bg-primary-800 px-10 py-6 text-white  md:py-10 3xl:rounded-bl-[30px] 3xl:rounded-br-[30px] lg:px-24 lg:pt-16 lg:pb-36 xl:px-48'>
+          <div className='grid grid-cols-4 bg-primary-800 px-10 py-6 text-white  md:py-10 lg:px-24 lg:pt-16 lg:pb-36 xl:px-48 3xl:rounded-bl-[30px] 3xl:rounded-br-[30px]'>
             <div className='col-span-4 flex flex-col gap-3 md:mb-8 lg:col-auto'>
               <LogoWhite
                 height={70}
@@ -271,22 +283,34 @@ export default function Layout({
               </a>
             </div>
             <div className='col-span-2 flex justify-end gap-3 md:gap-5 lg:col-auto lg:gap-8'>
-              <a href='#' target='_blank' rel='noopener noreferrer'>
+              <a
+                href='https://www.instagram.com/xellar.co/?hl=en'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
                 <Instagram
                   height={45}
                   width={45}
                   className='h-fit w-5 md:w-7 lg:h-auto lg:w-auto'
                 />
               </a>
-              <a href='#' target='_blank' rel='noopener noreferrer'>
+              <a
+                href='https://twitter.com/XellarCo'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
                 <Twitter
                   height={45}
                   width={45}
                   className='h-fit w-5 md:w-7 lg:h-auto lg:w-auto'
                 />
               </a>
-              <a href='#' target='_blank' rel='noopener noreferrer'>
-                <Discord
+              <a
+                href='https://medium.com/@team.xellar'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <Medium
                   height={45}
                   width={45}
                   className='h-fit w-5 md:w-7 lg:h-auto lg:w-auto'
